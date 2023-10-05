@@ -1,0 +1,4 @@
+body, div, input, textarea, select {
+    direction: rtl;
+    text-align: right;
+  }
