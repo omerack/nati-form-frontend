@@ -2,7 +2,6 @@ import React from "react";
 import SignatureCanvas from "react-signature-canvas";
 import { useState } from "react";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 
 function Signature() {
   const [sign, setSign] = useState();
