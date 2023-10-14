@@ -1,6 +1,7 @@
 import TextField from "@mui/material/TextField";
+import Alert from "@mui/material/Alert";
 
-function ParentId() {
+function ParentId({ register, errors }) {
   return (
     <div className="input-group">
       <label>מספר זהות של אחד מההורים</label>
@@ -9,7 +10,13 @@ function ParentId() {
         label="מספר זהות הורה"
         variant="outlined"
         fullWidth
+        {...register("parentId", {
+          required: "נא למלא את מספר הזהות",
+        })}
       />
+      {errors.parentId && (
+        <Alert severity="error">{errors.parentId.message}</Alert>
+      )}
     </div>
   );
 }

@@ -1,7 +1,8 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
+import Alert from "@mui/material/Alert";
 
-function Married() {
+function Married({ register, errors }) {
   return (
     <div>
       <div className="input-group">
@@ -12,14 +13,26 @@ function Married() {
           label="שם פרטי"
           variant="outlined"
           fullWidth
+          {...register("partnerName", {
+            required: "נא למלא את שם הפרטי של בן/בת הזוג",
+          })}
         />
+        {errors.partnerName && (
+          <Alert severity="error">{errors.partnerName.message}</Alert>
+        )}
         <label>שם משפחה - בן/בת זוג</label>
         <TextField
           id="outlined-basic"
           label="שם משפחה"
           variant="outlined"
           fullWidth
+          {...register("partnerLastName", {
+            required: "נא למלא את שם המשפחה של בן/בת הזוג",
+          })}
         />
+        {errors.partnerLastName && (
+          <Alert severity="error">{errors.partnerLastName.message}</Alert>
+        )}
       </div>
       <div className="input-group">
         <label>מספר זהות - בן/בת זוג</label>
@@ -28,7 +41,13 @@ function Married() {
           label="תעודת זהות"
           variant="outlined"
           fullWidth
+          {...register("partnerId", {
+            required: "נא למלא את תעודת הזהות של בן/בת הזוג",
+          })}
         />
+        {errors.partnerId && (
+          <Alert severity="error">{errors.partnerId.message}</Alert>
+        )}
       </div>
     </div>
   );

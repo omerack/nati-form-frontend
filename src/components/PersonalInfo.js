@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+// import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -9,16 +9,18 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import Married from "./Married"; // Import the Married component
+import Married from "./Married";
+import Alert from "@mui/material/Alert";
+// import { Controller, useFormContext } from "react-hook-form";
 
-function PersonalInfo() {
-  const [value, setValue] = useState(null);
-  const [maritalStatus, setMaritalStatus] = useState("singal"); // Initialize maritalStatus state
+function PersonalInfo({ register, errors }) {
+  const [maritalStatus, setMaritalStatus] = useState("singal");
 
-  // Function to handle radio button change
   const handleMaritalStatusChange = (event) => {
     setMaritalStatus(event.target.value);
   };
+
+  // const { control } = useFormContext();
 
   return (
     <div>
@@ -32,41 +34,63 @@ function PersonalInfo() {
           label="שם פרטי"
           variant="outlined"
           fullWidth
+          {...register("name", {
+            required: "נא למלא את השם הפרטי",
+          })}
         />
+        {errors.name && <Alert severity="error">{errors.name.message}</Alert>}
         <TextField
           id="outlined-basic"
           label="שם משפחה"
           variant="outlined"
           fullWidth
+          {...register("lastName", {
+            required: "נא למלא את שם המשפחה",
+          })}
         />
+        {errors.lastName && (
+          <Alert severity="error">{errors.lastName.message}</Alert>
+        )}
       </div>
       <div className="input-group">
-        <label>מספר זהות</label>
+        <label>תעודת זהות</label>
         <TextField
           id="outlined-basic"
           label="תעודת זהות"
           variant="outlined"
           fullWidth
+          {...register("id", {
+            required: "נא למלא את תעודת הזהות",
+          })}
         />
+        {errors.id && <Alert severity="error">{errors.id.message}</Alert>}
       </div>
-      <div className="input-group">
+      {/* <div className="input-group">
         <label>תאריך לידה</label>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DatePicker
-            value={value}
-            onChange={(newValue) => setValue(newValue)}
-            renderInput={(props) => <TextField {...props} variant="outlined" />}
-            fullWidth
-          />
-        </LocalizationProvider>
-      </div>
+        <Controller
+          control={control}
+          name="date"
+          render={({ field: { onChange, value = new Date() } }) => (
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker
+                format="dd/MM/yyyy"
+                value={value}
+                onChange={onChange}
+              />
+              {errors.date && (
+                <Alert severity="error">{errors.date.message}</Alert>
+              )}
+            </LocalizationProvider>
+          )}
+        />
+      </div> */}
       <FormControl>
         <FormLabel id="demo-radio-buttons-group-label">מצב משפחתי</FormLabel>
         <RadioGroup
           row
           aria-labelledby="demo-radio-buttons-group-label"
-          value={maritalStatus} // Set the value of the radio group
-          onChange={handleMaritalStatusChange} // Handle radio button change
+          value={maritalStatus}
+          onChange={handleMaritalStatusChange}
           name="radio-buttons-group"
         >
           <FormControlLabel value="singal" control={<Radio />} label="רווק" />
@@ -86,8 +110,9 @@ function PersonalInfo() {
         </RadioGroup>
       </FormControl>
 
-      {/* Conditionally render the Married component based on the selected marital status */}
-      {maritalStatus === "married" && <Married />}
+      {maritalStatus === "married" && (
+        <Married register={register} errors={errors} />
+      )}
     </div>
   );
 }
