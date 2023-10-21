@@ -1,6 +1,5 @@
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import "./Forms.css";
+import Typography from "@mui/material/Typography";
 import IdentityCheck from "./IdentityCheck";
 import "./rtl.css";
 import PersonalInfo from "./PersonalInfo";
@@ -8,17 +7,18 @@ import Contact from "./Contact";
 import { useForm, FormProvider } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import axios from "axios";
+import { Button } from "@mui/material";
 
 function Forms() {
   const methods = useForm();
   const { register, control, handleSubmit, formState } = methods;
   const { errors } = formState;
-  console.log(methods.getValues());
+  // console.log(methods.getValues());
 
   const onSubmit = (data) => {
     axios.post("http://localhost:3001/submit", data, {
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "multipart/form-data",
       },
     });
     console.log(data);
@@ -36,6 +36,7 @@ function Forms() {
           className="form-container"
           onSubmit={handleSubmit(onSubmit)}
           noValidate
+          encType="multipart/form-data"
         >
           <Typography variant="h3" gutterBottom>
             פרטי לקוח עצמאי חדש
@@ -56,11 +57,7 @@ function Forms() {
             <Contact register={register} errors={errors} />
           </div>
           <div className="input-group">
-            <IdentityCheck
-              register={register}
-              errors={errors}
-              control={control}
-            />
+            <IdentityCheck errors={errors} />
           </div>
 
           <Button type="submit" variant="contained" color="primary">

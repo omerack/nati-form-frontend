@@ -1,21 +1,22 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-// import InputLabel from "@mui/material/InputLabel";
-// import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-// import Select from "@mui/material/Select";
 import FileUpload from "./FileUpload";
 import Signature from "./Signature";
-import Typography from "@mui/material/Typography";
 import "./rtl.css";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+// import Alert from "@mui/material/Alert";
+// import InputLabel from "@mui/material/InputLabel";
+// import MenuItem from "@mui/material/MenuItem";
+// import Select from "@mui/material/Select";
+// import Typography from "@mui/material/Typography";
 // import License from "./SomeId/License";
 // import ParentId from "./SomeId/ParentId";
 // import Passport from "./SomeId/Passport";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 // import { useState } from "react";
 
-export default function IdentityCheck({ register, errors, control }) {
+export default function IdentityCheck({ errors }) {
   // const [age, setAge] = useState("");
   // const handleChange = (event) => {
   //   setAge(event.target.value);
@@ -23,9 +24,9 @@ export default function IdentityCheck({ register, errors, control }) {
 
   return (
     <Box sx={{ minWidth: 120 }}>
-      <Typography variant="h5" gutterBottom>
+      {/* <Typography variant="h5" gutterBottom>
         אימות זהות
-      </Typography>
+      </Typography> */}
       <FormControl fullWidth>
         {/* <InputLabel id="demo-simple-select-label">בחר</InputLabel>
         <Select
@@ -44,12 +45,9 @@ export default function IdentityCheck({ register, errors, control }) {
           {age === 2 && <Passport register={register} errors={errors} />}
           {age === 3 && <ParentId register={register} errors={errors} />}
         </div> */}
+
         <FileUpload />
-        <Signature
-          register={register}
-          errors={errors}
-          control={control}
-        />
+        <Signature />
         <FormControlLabel
           required
           control={<Checkbox />}

@@ -1,9 +1,8 @@
 import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
 // import CountrySelect from "./CountrySelect";
 import "./rtl.css";
 import Alert from "@mui/material/Alert";
-
+import Typography from "@mui/material/Typography";
 function contact({ register, errors }) {
   return (
     <div>

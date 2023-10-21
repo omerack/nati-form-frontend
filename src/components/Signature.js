@@ -1,8 +1,7 @@
 import { useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
-import Button from "@mui/material/Button";
 import { useFormContext } from "react-hook-form";
-
+import { Button } from "@mui/material";
 function Signature() {
   const signature = useRef();
   const { setValue } = useFormContext();

@@ -8,9 +8,9 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
 import Married from "./Married";
 import Alert from "@mui/material/Alert";
+import Typography from "@mui/material/Typography";
 // import { Controller, useFormContext } from "react-hook-form";
 
 function PersonalInfo({ register, errors }) {
@@ -24,7 +24,7 @@ function PersonalInfo({ register, errors }) {
 
   return (
     <div>
-      <Typography variant="h5" gutterBottom>
+      <Typography>
         פרטים אישיים
       </Typography>
       <div className="input-group">
@@ -35,10 +35,10 @@ function PersonalInfo({ register, errors }) {
           variant="outlined"
           fullWidth
           {...register("name", {
-            required: "נא למלא את השם הפרטי",
+            required: "נא למלא את השם  פרטי",
           })}
         />
-        {errors.name && <Alert severity="error">{errors.name.message}</Alert>}
+        {errors.name && <Alert severit ="error">{errors.name.message}</Alert>}
         <TextField
           id="outlined-basic"
           label="שם משפחה"
