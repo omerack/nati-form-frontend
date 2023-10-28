@@ -13,14 +13,18 @@ function Forms() {
   const methods = useForm();
   const { register, control, handleSubmit, formState } = methods;
   const { errors } = formState;
-  console.log(methods.getValues()); 
+  console.log(methods.getValues());
 
   const onSubmit = (data) => {
-    axios.post("http://localhost:3001/submit", data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    axios.post(
+      "https://master--splendorous-smakager-2742f8.netlify.app/submit",
+      data,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
   };
 
   // useEffect(() => {
