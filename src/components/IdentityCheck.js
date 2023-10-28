@@ -3,20 +3,21 @@ import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import FileUpload from "./FileUpload";
 import Signature from "./Signature";
-import "./rtl.css";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert";
+
 // import Alert from "@mui/material/Alert";
 // import InputLabel from "@mui/material/InputLabel";
 // import MenuItem from "@mui/material/MenuItem";
 // import Select from "@mui/material/Select";
-// import Typography from "@mui/material/Typography";
 // import License from "./SomeId/License";
 // import ParentId from "./SomeId/ParentId";
 // import Passport from "./SomeId/Passport";
 // import { useState } from "react";
 
-export default function IdentityCheck({ errors }) {
+export default function IdentityCheck({ errors, register }) {
   // const [age, setAge] = useState("");
   // const handleChange = (event) => {
   //   setAge(event.target.value);
@@ -46,13 +47,27 @@ export default function IdentityCheck({ errors }) {
           {age === 3 && <ParentId register={register} errors={errors} />}
         </div> */}
 
+        <Typography variant="h6" gutterBottom>
+          צרף מסמכים
+        </Typography>
         <FileUpload />
         <Signature />
         <FormControlLabel
-          required
+          style={{ padding: "50px 30px" }}
+          value="start"
           control={<Checkbox />}
-          label="אני מאשר שכל הפרטים שמסרתי נכונים"
+          label="אני מאשר שכל הפרטים נכונים"
+          labelPlacement="start"
+          {...register("checkbox", {
+            pattern: {
+              value: true,
+              message: "נא למלא את שם המשפחה",
+            },
+          })}
         />
+        {errors.checkbox && (
+          <Alert severit="error">{errors.checkbox.message}</Alert>
+        )}
       </FormControl>
     </Box>
   );

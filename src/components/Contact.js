@@ -1,6 +1,5 @@
 import TextField from "@mui/material/TextField";
 // import CountrySelect from "./CountrySelect";
-import "./rtl.css";
 import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
 function contact({ register, errors }) {
@@ -13,10 +12,10 @@ function contact({ register, errors }) {
         <div className="input-group">
           <label>מספר נייד</label>
           <TextField
+            style={{ width: "350px" }}
             id="outlined-basic"
             label="מספר טלפון"
             variant="outlined"
-            fullWidth
             {...register("phone", {
               required: "נא למלא את מספר הטלפון",
             })}
@@ -31,7 +30,7 @@ function contact({ register, errors }) {
             id="outlined-basic"
             label="someone@exaple.com"
             variant="outlined"
-            fullWidth
+            style={{ width: "350px" }}
             {...register("email", {
               required: "נא למלא את הדואל",
               pattern: {
@@ -46,12 +45,12 @@ function contact({ register, errors }) {
           )}
         </div>
         <div className="input-group">
-          <label>כתובת מגורים</label>
+          <label style={{ margin: "25px 0" }}>כתובת מגורים</label>
           <TextField
+            style={{ width: "300px", marginLeft: "10px", marginBottom: "20px" }}
             id="outlined-basic"
             label="רחוב"
             variant="outlined"
-            fullWidth
             {...register("street", {
               required: "נא למלא את הרחוב",
             })}
@@ -60,10 +59,10 @@ function contact({ register, errors }) {
             <Alert severity="error">{errors.street.message}</Alert>
           )}
           <TextField
+            style={{ width: "100px", marginLeft: "20px" }}
             id="outlined-basic"
             label="מספר"
             variant="outlined"
-            fullWidth
             {...register("streetNumber", {
               required: "נא למלא מספר בית",
               pattern: {
@@ -76,6 +75,7 @@ function contact({ register, errors }) {
             <Alert severity="error">{errors.streetNumber.message}</Alert>
           )}
           <TextField
+            style={{ width: "200px" }}
             id="outlined-basic"
             label="עיר"
             variant="outlined"
@@ -86,10 +86,10 @@ function contact({ register, errors }) {
           />
           {errors.city && <Alert severity="error">{errors.city.message}</Alert>}
           <TextField
+            style={{ width: "350px" }}
             id="outlined-basic"
             label="מיקוד"
             variant="outlined"
-            fullWidth
             {...register("postalCode", {
               required: "נא למלא את המיקוד",
             })}

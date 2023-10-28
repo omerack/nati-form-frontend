@@ -9,10 +9,10 @@ function Married({ register, errors }) {
         <label>שם פרטי - בן/בת זוג</label>
         <TextField
           margin="normal"
+          style={{ width: "350px" }}
           id="outlined-basic"
           label="שם פרטי"
           variant="outlined"
-          fullWidth
           {...register("partnerName", {
             required: "נא למלא את שם הפרטי של בן/בת הזוג",
           })}
@@ -22,10 +22,10 @@ function Married({ register, errors }) {
         )}
         <label>שם משפחה - בן/בת זוג</label>
         <TextField
+          style={{ width: "350px" }}
           id="outlined-basic"
           label="שם משפחה"
           variant="outlined"
-          fullWidth
           {...register("partnerLastName", {
             required: "נא למלא את שם המשפחה של בן/בת הזוג",
           })}
@@ -37,10 +37,10 @@ function Married({ register, errors }) {
       <div className="input-group">
         <label>מספר זהות - בן/בת זוג</label>
         <TextField
+          style={{ width: "350px" }}
           id="outlined-basic"
           label="תעודת זהות"
           variant="outlined"
-          fullWidth
           {...register("partnerId", {
             required: "נא למלא את תעודת הזהות של בן/בת הזוג",
           })}

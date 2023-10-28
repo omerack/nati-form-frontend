@@ -5,6 +5,34 @@ import { useFormContext } from "react-hook-form";
 function FileUpload() {
   const { setValue } = useFormContext();
 
+  // const baseStyle = {
+  //   flex: 1,
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   alignItems: "center",
+  //   padding: "20px",
+  //   borderWidth: 2,
+  //   borderRadius: 2,
+  //   borderColor: "#eeeeee",
+  //   borderStyle: "dashed",
+  //   backgroundColor: "#fafafa",
+  //   color: "#bdbdbd",
+  //   outline: "none",
+  //   transition: "border .24s ease-in-out",
+  // };
+
+  // const focusedStyle = {
+  //   borderColor: "#2196f3",
+  // };
+
+  // const acceptStyle = {
+  //   borderColor: "#00e676",
+  // };
+
+  // const rejectStyle = {
+  //   borderColor: "#ff1744",
+  // };
+
   const onDrop = useCallback(
     (acceptedFiles) => {
       const fileContents = acceptedFiles.map((file) => {
@@ -29,14 +57,17 @@ function FileUpload() {
     <li key={file.path}>{file.path}</li>
   ));
 
+
   return (
-    <div {...getRootProps()}>
-      <input {...getInputProps({ name: "fileUploads" })} />
-      {isDragActive ? (
-        <p>Drop the files here ...</p>
-      ) : (
-        <p>Drag 'n' drop some files here, or click to select files</p>
-      )}
+    <div>
+      <div {...getRootProps()}>
+        <input {...getInputProps()} />
+        {isDragActive ? (
+          <p>גרור את הקבצים לכאן</p>
+        ) : (
+          <p>גרור את הקבצים הרצויים או לחץ ובחר את הקבצים</p>
+        )}
+      </div>
       {files}
     </div>
   );

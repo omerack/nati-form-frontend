@@ -10,7 +10,6 @@ import FormLabel from "@mui/material/FormLabel";
 import TextField from "@mui/material/TextField";
 import Married from "./Married";
 import Alert from "@mui/material/Alert";
-import Typography from "@mui/material/Typography";
 // import { Controller, useFormContext } from "react-hook-form";
 
 function PersonalInfo({ register, errors }) {
@@ -24,26 +23,26 @@ function PersonalInfo({ register, errors }) {
 
   return (
     <div>
-      <Typography>
-        פרטים אישיים
-      </Typography>
       <div className="input-group">
+        <label>פרטים אישיים</label>
         <TextField
+          inputProps={{ dir: "rtl" }}
           margin="normal"
+          style={{ marginLeft: "10px", width: "350px" }}
           id="outlined-basic"
           label="שם פרטי"
           variant="outlined"
-          fullWidth
           {...register("name", {
             required: "נא למלא את השם  פרטי",
           })}
         />
-        {errors.name && <Alert severit ="error">{errors.name.message}</Alert>}
+        {errors.name && <Alert severit="error">{errors.name.message}</Alert>}
         <TextField
+          margin="normal"
+          style={{ width: "350px" }}
           id="outlined-basic"
           label="שם משפחה"
           variant="outlined"
-          fullWidth
           {...register("lastName", {
             required: "נא למלא את שם המשפחה",
           })}
@@ -55,10 +54,11 @@ function PersonalInfo({ register, errors }) {
       <div className="input-group">
         <label>תעודת זהות</label>
         <TextField
+          style={{ width: "350px" }}
+          inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
           id="outlined-basic"
           label="תעודת זהות"
           variant="outlined"
-          fullWidth
           {...register("id", {
             required: "נא למלא את תעודת הזהות",
           })}
@@ -106,6 +106,7 @@ function PersonalInfo({ register, errors }) {
             value="separated"
             control={<Radio />}
             label="פרוד"
+
           />
         </RadioGroup>
       </FormControl>

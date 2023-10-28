@@ -1,19 +1,19 @@
 import "./Forms.css";
 import Typography from "@mui/material/Typography";
 import IdentityCheck from "./IdentityCheck";
-import "./rtl.css";
 import PersonalInfo from "./PersonalInfo";
 import Contact from "./Contact";
 import { useForm, FormProvider } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import axios from "axios";
 import { Button } from "@mui/material";
+// import { useEffect } from "react";
 
 function Forms() {
   const methods = useForm();
   const { register, control, handleSubmit, formState } = methods;
   const { errors } = formState;
-  // console.log(methods.getValues());
+  console.log(methods.getValues()); 
 
   const onSubmit = (data) => {
     axios.post("http://localhost:3001/submit", data, {
@@ -21,8 +21,13 @@ function Forms() {
         "Content-Type": "multipart/form-data",
       },
     });
-    console.log(data);
   };
+
+  // useEffect(() => {
+  //   if (isSubmitSuccessful) {
+  //     reset();
+  //   }
+  // }, [isSubmitSuccessful, reset]);
 
   return (
     <div>
@@ -57,7 +62,7 @@ function Forms() {
             <Contact register={register} errors={errors} />
           </div>
           <div className="input-group">
-            <IdentityCheck errors={errors} />
+            <IdentityCheck errors={errors} register={register} />
           </div>
 
           <Button type="submit" variant="contained" color="primary">
