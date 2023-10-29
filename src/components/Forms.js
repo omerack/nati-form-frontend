@@ -16,7 +16,7 @@ function Forms() {
   console.log(methods.getValues());
 
   const onSubmit = (data) => {
-    axios.post("https://653bad7ace9a3134b4a0.appwrite.global/", data, {
+    axios.post("https://653bad7ace9a3134b4a0.appwrite.global/submit", data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
