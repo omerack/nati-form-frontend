@@ -16,15 +16,11 @@ function Forms() {
   console.log(methods.getValues());
 
   const onSubmit = (data) => {
-    axios.post(
-      "https://master--splendorous-smakager-2742f8.netlify.app/submit/",
-      data,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+    axios.post("https://653bad7ace9a3134b4a0.appwrite.global/", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
   };
 
   // useEffect(() => {
@@ -46,6 +42,7 @@ function Forms() {
           onSubmit={handleSubmit(onSubmit)}
           noValidate
           encType="multipart/form-data"
+          action="/submit"
         >
           <Typography variant="h3" gutterBottom>
             פרטי לקוח עצמאי חדש
