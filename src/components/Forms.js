@@ -17,7 +17,7 @@ function Forms() {
 
   const onSubmit = (data) => {
     axios.post(
-      "https://master--splendorous-smakager-2742f8.netlify.app/",
+      "https://master--splendorous-smakager-2742f8.netlify.app/submit/",
       data,
       {
         headers: {
