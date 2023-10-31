@@ -13,14 +13,19 @@ function Forms() {
   const methods = useForm();
   const { register, control, handleSubmit, formState } = methods;
   const { errors } = formState;
-  console.log(methods.getValues());
+  // console.log(methods.getValues());
 
   const onSubmit = (data) => {
-    axios.post("https://653bad7ace9a3134b4a0.appwrite.global/submit", data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    axios.post(
+      "https://6540daa2c347507d3bf8.appwrite.global:3001/submit",
+      data,
+      // {
+      //   headers: {
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // }
+    );
+    console.log(data);
   };
 
   // useEffect(() => {

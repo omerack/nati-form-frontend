@@ -65,25 +65,6 @@ function PersonalInfo({ register, errors }) {
         />
         {errors.id && <Alert severity="error">{errors.id.message}</Alert>}
       </div>
-      {/* <div className="input-group">
-        <label>תאריך לידה</label>
-        <Controller
-          control={control}
-          name="date"
-          render={({ field: { onChange, value = new Date() } }) => (
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DatePicker
-                format="dd/MM/yyyy"
-                value={value}
-                onChange={onChange}
-              />
-              {errors.date && (
-                <Alert severity="error">{errors.date.message}</Alert>
-              )}
-            </LocalizationProvider>
-          )}
-        />
-      </div> */}
       <FormControl>
         <FormLabel id="demo-radio-buttons-group-label">מצב משפחתי</FormLabel>
         <RadioGroup

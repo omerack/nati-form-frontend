@@ -1,5 +1,4 @@
 import TextField from "@mui/material/TextField";
-// import CountrySelect from "./CountrySelect";
 import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
 function contact({ register, errors }) {
@@ -98,7 +97,6 @@ function contact({ register, errors }) {
             <Alert severity="error">{errors.postalCode.message}</Alert>
           )}
         </div>
-        {/* <CountrySelect /> */}
       </div>
     </div>
   );
