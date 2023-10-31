@@ -19,11 +19,11 @@ function Forms() {
     axios.post(
       "https://6540daa2c347507d3bf8.appwrite.global:3001/submit",
       data,
-      // {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // }
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
     );
     console.log(data);
   };
