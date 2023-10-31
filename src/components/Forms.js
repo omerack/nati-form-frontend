@@ -17,7 +17,7 @@ function Forms() {
 
   const onSubmit = (data) => {
     axios.post(
-      "https://6540daa2c347507d3bf8.appwrite.global:3001/submit",
+      "https://6540daa2c347507d3bf8.appwrite.global",
       data,
       {
         headers: {
