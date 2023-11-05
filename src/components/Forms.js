@@ -7,7 +7,6 @@ import { useForm, FormProvider } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import axios from "axios";
 import { Button } from "@mui/material";
-// import { useEffect } from "react";
 
 function Forms() {
   const methods = useForm();
@@ -16,23 +15,13 @@ function Forms() {
   // console.log(methods.getValues());
 
   const onSubmit = (data) => {
-    axios.post(
-      "https://6540daa2c347507d3bf8.appwrite.global",
-      data,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+    axios.post("https://gilad-form-backend.onrender.com/submit", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     console.log(data);
   };
-
-  // useEffect(() => {
-  //   if (isSubmitSuccessful) {
-  //     reset();
-  //   }
-  // }, [isSubmitSuccessful, reset]);
 
   return (
     <div>
@@ -47,7 +36,6 @@ function Forms() {
           onSubmit={handleSubmit(onSubmit)}
           noValidate
           encType="multipart/form-data"
-          action="/submit"
         >
           <Typography variant="h3" gutterBottom>
             פרטי לקוח עצמאי חדש
