@@ -35,7 +35,7 @@ function Forms() {
       });
       console.log(data);
       const id = data.id;
-      window.location.href = `https://gilad-form-frontend.onrender.com/review/${id}`;
+      window.location.href = `/review/${id}`;
     } catch (error) {
       console.error(error);
     }
@@ -55,7 +55,7 @@ function Forms() {
           </Typography>
           <div className="section">
             <Typography variant="h5" gutterBottom>
-              עוסק פטור מורשה
+              עוסק פטור/מורשה
             </Typography>
           </div>
           <div className="section">
@@ -77,6 +77,11 @@ function Forms() {
         </form>
         <DevTool control={control} />
       </FormProvider>
+      <form action="/omer">
+        <Button type="submit" variant="contained" color="primary">
+          סע
+        </Button>
+      </form>
     </div>
   );
 }

@@ -24,7 +24,7 @@ function App() {
             </FormProvider>
           }
         />
-        <Route path="submit" element={<Submit />} />
+        <Route path="omer" element={<Submit />} />
       </Route>
     )
   );
