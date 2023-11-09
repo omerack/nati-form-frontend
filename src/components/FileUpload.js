@@ -90,7 +90,7 @@ export default function FileUpload(props) {
   );
 
   return (
-    <div className="container">
+    <div >
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
         <p>גרור את הקבצים הרצויים או לחץ ובחר את הקבצים</p>
