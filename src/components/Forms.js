@@ -35,7 +35,7 @@ function Forms() {
       });
       console.log(data);
       const id = data.id;
-      window.location.href = `/review/${id}`;
+      window.location.href = `https://gilad-form-frontend.onrender.com/review/${id}`;
     } catch (error) {
       console.error(error);
     }
