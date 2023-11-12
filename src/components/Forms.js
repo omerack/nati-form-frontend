@@ -78,7 +78,7 @@ function Forms() {
         </form>
         <DevTool control={control} />
       </FormProvider>
-      <form action="/omer">
+      <form action="/submit" method="get" enctype="multipart/form-data">
         <Button type="submit" variant="contained" color="primary">
           סע
         </Button>
