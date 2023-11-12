@@ -29,7 +29,7 @@ function Forms() {
 
   const onSubmit = async (data) => {
     try {
-      await axios.post("http://localhost:3001/submit", data, {
+      await axios.post("https://gilad-form-backend.onrender.com/submit", data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

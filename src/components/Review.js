@@ -11,7 +11,7 @@ function Review() {
     e.preventDefault();
 
     try {
-      await axios.post(`http://localhost:3001/${id}`);
+      await axios.post(`https://gilad-form-backend.onrender.com/${id}`);
       window.location.href = "/submit";
     } catch (error) {
       console.error(error);
@@ -24,7 +24,7 @@ function Review() {
       <form onSubmit={handleSubmit}>
         <div className="container">
           <iframe
-            src={`http://localhost:3001/${id}`}
+            src={`https://gilad-form-backend.onrender.com/${id}`}
             width="80%"
             height="700"
             title="form review"
