@@ -8,6 +8,8 @@ import axios from "axios";
 import { Button } from "@mui/material";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import logo from "../logo.jpg";
+import "./Review.css";
 
 function Forms() {
   const methods = useForm({
@@ -46,6 +48,13 @@ function Forms() {
 
   return (
     <div>
+      <div style={{ width: "100%", textAlign: "center" }}>
+        <img
+          src={logo}
+          alt="form"
+          style={{ width: "500px", height: "300px" }}
+        />
+      </div>
       <FormProvider {...methods}>
         <form
           className="form-container"
