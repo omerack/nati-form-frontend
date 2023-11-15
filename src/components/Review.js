@@ -3,16 +3,18 @@ import { Button } from "@mui/material";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./Review.css";
+import { useNavigate } from "react-router-dom";
 
 function Review() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       await axios.post(`https://gilad-form-backend.onrender.com/submit/${id}`);
-      window.location.href = "/submit";
+      navigate("/submit");
     } catch (error) {
       console.error(error);
     }

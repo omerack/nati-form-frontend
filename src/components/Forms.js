@@ -7,6 +7,7 @@ import { DevTool } from "@hookform/devtools";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useForm, FormProvider } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 function Forms() {
   const methods = useForm({
@@ -26,6 +27,8 @@ function Forms() {
   const { register, control, handleSubmit, formState } = methods;
   const { errors } = formState;
 
+  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
     try {
       await axios.post("https://gilad-form-backend.onrender.com/view", data, {
@@ -35,7 +38,7 @@ function Forms() {
       });
       console.log(data);
       const id = data.id;
-      window.location.href = `/review/${id}`;
+      navigate(`/review/${id}`);
     } catch (error) {
       console.error(error);
     }
