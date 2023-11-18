@@ -1,6 +1,7 @@
 import React, { useMemo, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { useFormContext } from "react-hook-form";
+import Alert from "@mui/material/Alert";
 
 const baseStyle = {
   flex: 1,
@@ -30,21 +31,19 @@ const rejectStyle = {
   borderColor: "#ff1744",
 };
 
-export default function FileUpload(props) {
-  const { setValue } = useFormContext();
+export default function FileUpload() {
+  const { setValue, register, formState } = useFormContext();
+  const { errors } = formState;
+
+  register("fileUploads", { required: "יש להוסיף את המסמכים הרלוונטים" });
 
   const onDrop = useCallback(
     (acceptedFiles) => {
-      const fileContents = acceptedFiles.map((file) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        return new Promise((resolve) => {
-          reader.onload = () => resolve(reader.result);
-        });
-      });
-      Promise.all(fileContents).then((imageContents) => {
-        setValue("fileUploads", imageContents);
-        console.log(imageContents);
+      // Set the entire array at once
+      setValue("fileUploads", acceptedFiles);
+
+      acceptedFiles.forEach((file, index) => {
+        console.log(file);
       });
     },
     [setValue]
@@ -57,7 +56,7 @@ export default function FileUpload(props) {
     isFocused,
     isDragAccept,
     isDragReject,
-    // inputRef,
+    inputRef,
   } = useDropzone({
     accept: {
       "image/jpeg": [],
@@ -71,13 +70,13 @@ export default function FileUpload(props) {
     <li key={file.path}>{file.path}</li>
   ));
 
-  // const removeAll = () => {
-  //   console.log("removeAll...");
-  //   acceptedFiles.length = 0;
-  //   acceptedFiles.splice(0, acceptedFiles.length);
-  //   inputRef.current.value = "";
-  //   console.log(acceptedFiles);
-  // };
+  const removeAll = () => {
+    console.log("removeAll...");
+    acceptedFiles.length = 0;
+    setValue("fileUploads", []); // Clear the entire array
+    inputRef.current.value = "";
+    console.log(acceptedFiles);
+  };
 
   const style = useMemo(
     () => ({
@@ -90,13 +89,20 @@ export default function FileUpload(props) {
   );
 
   return (
-    <div >
+    <div>
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
         <p>גרור את הקבצים הרצויים או לחץ ובחר את הקבצים</p>
       </div>
-      {files}
-      {/* {files.length > 0 && <button onClick={removeAll}>Remove All</button>} */}
+      {files.length > 0 && (
+        <div>
+          {files}
+          <button onClick={removeAll}>Remove All</button>
+        </div>
+      )}
+      {errors.fileUploads && (
+        <Alert severity="error">{errors.fileUploads.message}</Alert>
+      )}
     </div>
   );
 }

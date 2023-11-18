@@ -28,17 +28,16 @@ function Forms() {
 
   const { register, control, handleSubmit, formState } = methods;
   const { errors } = formState;
-
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
+    console.log(data);
     try {
       await axios.post("https://gilad-form-backend.onrender.com/view", data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(data);
       const id = data.id;
       navigate(`/review/${id}`);
     } catch (error) {
@@ -89,11 +88,7 @@ function Forms() {
         </form>
         <DevTool control={control} />
       </FormProvider>
-      <form action="/submit" method="get">
-        <Button type="submit" variant="contained" color="primary">
-          סע
-        </Button>
-      </form>
+      <form action="/submit" method="get"></form>
     </div>
   );
 }

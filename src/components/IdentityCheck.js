@@ -22,20 +22,20 @@ export default function IdentityCheck({ errors, register }) {
 
         <Signature />
         <FormControlLabel
-          style={{ padding: "50px 30px" }}
-          value="start"
-          control={<Checkbox />}
+          style={{ padding: "50px 30px 0px 30px" }}
+          control={<Checkbox defaultChecked />}
           label="אני מאשר שכל הפרטים נכונים"
           labelPlacement="start"
           {...register("checkbox", {
-            pattern: {
-              value: true,
-              message: "נא למלא את שם המשפחה",
+            validate: {
+              approve: (fieldValue) => {
+                return fieldValue === true || "נא לאשר שהפרטים נכונים";
+              },
             },
           })}
         />
         {errors.checkbox && (
-          <Alert severit="error">{errors.checkbox.message}</Alert>
+          <Alert severity="error">{errors.checkbox.message}</Alert>
         )}
       </FormControl>
     </Box>

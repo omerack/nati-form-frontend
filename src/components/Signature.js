@@ -2,9 +2,14 @@ import { useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
 import { useFormContext } from "react-hook-form";
 import { Button } from "@mui/material";
+import Alert from "@mui/material/Alert";
+
 function Signature() {
   const signature = useRef();
-  const { setValue } = useFormContext();
+  const { setValue, register, formState } = useFormContext();
+  const { errors } = formState;
+
+  register("signature", { required: "חובה להוסיף חתימה" });
 
   return (
     <div className="input-group">
@@ -21,12 +26,17 @@ function Signature() {
         />
       </div>
       <Button
-        onClick={() => signature.current.clear()}
+        onClick={() => {signature.current.clear()
+          setValue("signature", "");
+        }}
         variant="contained"
         color="primary"
       >
         נקה
       </Button>
+      {errors.signature && (
+        <Alert severity="error">{errors.signature.message}</Alert>
+      )}
     </div>
   );
 }

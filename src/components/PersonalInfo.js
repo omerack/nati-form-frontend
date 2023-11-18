@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-// import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -10,7 +8,6 @@ import FormLabel from "@mui/material/FormLabel";
 import TextField from "@mui/material/TextField";
 import Married from "./Married";
 import Alert from "@mui/material/Alert";
-// import { Controller, useFormContext } from "react-hook-form";
 
 function PersonalInfo({ register, errors }) {
   const [maritalStatus, setMaritalStatus] = useState("singal");
@@ -18,8 +15,6 @@ function PersonalInfo({ register, errors }) {
   const handleMaritalStatusChange = (event) => {
     setMaritalStatus(event.target.value);
   };
-
-  // const { control } = useFormContext();
 
   return (
     <div>
@@ -36,7 +31,6 @@ function PersonalInfo({ register, errors }) {
             required: "נא למלא את השם  פרטי",
           })}
         />
-        {errors.name && <Alert severit="error">{errors.name.message}</Alert>}
         <TextField
           margin="normal"
           style={{ width: "350px" }}
@@ -47,6 +41,7 @@ function PersonalInfo({ register, errors }) {
             required: "נא למלא את שם המשפחה",
           })}
         />
+        {errors.name && <Alert severity="error">{errors.name.message}</Alert>}
         {errors.lastName && (
           <Alert severity="error">{errors.lastName.message}</Alert>
         )}
@@ -61,6 +56,13 @@ function PersonalInfo({ register, errors }) {
           variant="outlined"
           {...register("id", {
             required: "נא למלא את תעודת הזהות",
+            validate: {
+              length: (fieldValue) => {
+                return (
+                  fieldValue.length === 9 || "תעודת הזהות חייבת להיות 9 ספרות"
+                );
+              },
+            },
           })}
         />
         {errors.id && <Alert severity="error">{errors.id.message}</Alert>}
@@ -87,7 +89,6 @@ function PersonalInfo({ register, errors }) {
             value="separated"
             control={<Radio />}
             label="פרוד"
-
           />
         </RadioGroup>
       </FormControl>

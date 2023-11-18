@@ -11,12 +11,20 @@ function contact({ register, errors }) {
         <div className="input-group">
           <label>מספר נייד</label>
           <TextField
+            InputProps={{  } }
             style={{ width: "350px" }}
             id="outlined-basic"
             label="מספר טלפון"
             variant="outlined"
             {...register("phone", {
               required: "נא למלא את מספר הטלפון",
+              validate: {
+                length: (fieldValue) => {
+                  return (
+                    fieldValue.length === 10 || "מספר הנייד חייב להיות 10 ספרות"
+                  );
+                },
+              },
             })}
           />
           {errors.phone && (
@@ -54,9 +62,7 @@ function contact({ register, errors }) {
               required: "נא למלא את הרחוב",
             })}
           />
-          {errors.street && (
-            <Alert severity="error">{errors.street.message}</Alert>
-          )}
+
           <TextField
             style={{ width: "100px", marginLeft: "20px" }}
             id="outlined-basic"
@@ -70,9 +76,7 @@ function contact({ register, errors }) {
               },
             })}
           />
-          {errors.streetNumber && (
-            <Alert severity="error">{errors.streetNumber.message}</Alert>
-          )}
+
           <TextField
             style={{ width: "200px" }}
             id="outlined-basic"
@@ -83,18 +87,12 @@ function contact({ register, errors }) {
               required: "נא למלא את שם העיר",
             })}
           />
+          {errors.street && (
+            <Alert severity="error">{errors.street.message}</Alert>
+          )}
           {errors.city && <Alert severity="error">{errors.city.message}</Alert>}
-          <TextField
-            style={{ width: "350px" }}
-            id="outlined-basic"
-            label="מיקוד"
-            variant="outlined"
-            {...register("postalCode", {
-              required: "נא למלא את המיקוד",
-            })}
-          />
-          {errors.postalCode && (
-            <Alert severity="error">{errors.postalCode.message}</Alert>
+          {errors.streetNumber && (
+            <Alert severity="error">{errors.streetNumber.message}</Alert>
           )}
         </div>
       </div>
