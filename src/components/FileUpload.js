@@ -14,9 +14,10 @@ const baseStyle = {
   borderColor: "#eeeeee",
   borderStyle: "dashed",
   backgroundColor: "#fafafa",
-  color: "#bdbdbd",
+  color: "grey",
   outline: "none",
   transition: "border .24s ease-in-out",
+  width: "70%",
 };
 
 const focusedStyle = {
@@ -39,7 +40,6 @@ export default function FileUpload() {
 
   const onDrop = useCallback(
     (acceptedFiles) => {
-      // Set the entire array at once
       setValue("fileUploads", acceptedFiles);
 
       acceptedFiles.forEach((file, index) => {
@@ -73,7 +73,7 @@ export default function FileUpload() {
   const removeAll = () => {
     console.log("removeAll...");
     acceptedFiles.length = 0;
-    setValue("fileUploads", []); // Clear the entire array
+    setValue("fileUploads", []);
     inputRef.current.value = "";
     console.log(acceptedFiles);
   };

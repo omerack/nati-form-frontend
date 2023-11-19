@@ -19,7 +19,6 @@ export default function IdentityCheck({ errors, register }) {
           נא לצרף רק קבצי pdf, png, jpg
         </Typography>
         <FileUpload />
-
         <Signature />
         <FormControlLabel
           style={{ padding: "50px 30px 0px 30px" }}

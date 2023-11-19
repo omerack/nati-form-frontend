@@ -43,6 +43,13 @@ function Married({ register, errors }) {
           variant="outlined"
           {...register("partnerId", {
             required: "נא למלא את תעודת הזהות של בן/בת הזוג",
+            validate: {
+              length: (fieldValue) => {
+                return (
+                  fieldValue.length === 9 || "תעודת הזהות חייבת להיות 9 ספרות"
+                );
+              },
+            },
           })}
         />
         {errors.partnerId && (

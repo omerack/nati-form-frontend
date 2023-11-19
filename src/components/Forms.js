@@ -3,13 +3,12 @@ import Typography from "@mui/material/Typography";
 import IdentityCheck from "./IdentityCheck";
 import PersonalInfo from "./PersonalInfo";
 import Contact from "./Contact";
-import { DevTool } from "@hookform/devtools";
+// import { DevTool } from "@hookform/devtools";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import logo from "../logo.jpg";
-import "./Review.css";
 
 function Forms() {
   const methods = useForm({
@@ -46,13 +45,9 @@ function Forms() {
   };
 
   return (
-    <div>
-      <div style={{ width: "100%", textAlign: "center" }}>
-        <img
-          src={logo}
-          alt="form"
-          style={{ width: "500px", height: "300px" }}
-        />
+    <>
+      <div className="div-img">
+        <img src={logo} alt="form" className="img" />
       </div>
       <FormProvider {...methods}>
         <form
@@ -86,10 +81,10 @@ function Forms() {
             הבא
           </Button>
         </form>
-        <DevTool control={control} />
+        {/* <DevTool control={control} /> */}
       </FormProvider>
       <form action="/submit" method="get"></form>
-    </div>
+    </>
   );
 }
 
