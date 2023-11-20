@@ -35,7 +35,7 @@ function contact({ register, errors }) {
           <label>דוא"ל</label>
           <TextField
             id="outlined-basic"
-            label="someone@exaple.com"
+            label="someone@example.com"
             variant="outlined"
             style={{ width: "350px" }}
             {...register("email", {
