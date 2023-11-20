@@ -43,7 +43,6 @@ export default function FileUpload() {
       setValue("fileUploads", acceptedFiles);
 
       acceptedFiles.forEach((file, index) => {
-        console.log(file);
       });
     },
     [setValue]
@@ -71,11 +70,9 @@ export default function FileUpload() {
   ));
 
   const removeAll = () => {
-    console.log("removeAll...");
     acceptedFiles.length = 0;
-    setValue("fileUploads", []);
+    setValue("fileUploads", []); 
     inputRef.current.value = "";
-    console.log(acceptedFiles);
   };
 
   const style = useMemo(

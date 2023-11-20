@@ -21,7 +21,6 @@ function Forms() {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data) => {
-    console.log(data);
     setLoading(true);
     try {
       await axios.post("https://gilad-form-backend.onrender.com/view", data, {
