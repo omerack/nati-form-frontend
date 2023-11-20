@@ -4,13 +4,17 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./Review.css";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function Review() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       await axios.post(`https://gilad-form-backend.onrender.com/submit/${id}`);
@@ -37,7 +41,6 @@ function Review() {
             type="submit"
             variant="contained"
             color="primary"
-            className="button"
             style={{
               fontSize: "20px",
               width: "150px",
@@ -47,6 +50,7 @@ function Review() {
           >
             שלח
           </Button>
+          {loading && <ClipLoader color="#1976d2" />}
         </div>
       </form>
     </div>

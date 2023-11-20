@@ -1,4 +1,6 @@
 import "./Forms.css";
+import logo from "../logo.jpg";
+import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import IdentityCheck from "./IdentityCheck";
 import PersonalInfo from "./PersonalInfo";
@@ -8,7 +10,7 @@ import axios from "axios";
 import { Button } from "@mui/material";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import logo from "../logo.jpg";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function Forms() {
   const methods = useForm({
@@ -28,9 +30,11 @@ function Forms() {
   const { register, control, handleSubmit, formState } = methods;
   const { errors } = formState;
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data) => {
     console.log(data);
+    setLoading(true);
     try {
       await axios.post("https://gilad-form-backend.onrender.com/view", data, {
         headers: {
@@ -41,6 +45,8 @@ function Forms() {
       navigate(`/review/${id}`);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -80,6 +86,7 @@ function Forms() {
           <Button type="submit" variant="contained" color="primary">
             הבא
           </Button>
+          {loading && <ClipLoader color="#1976d2" />}
         </form>
         {/* <DevTool control={control} /> */}
       </FormProvider>

@@ -3,6 +3,7 @@ import SignatureCanvas from "react-signature-canvas";
 import { useFormContext } from "react-hook-form";
 import { Button } from "@mui/material";
 import Alert from "@mui/material/Alert";
+import "./Forms.css";
 
 function Signature() {
   const signature = useRef();
@@ -14,19 +15,18 @@ function Signature() {
   return (
     <div className="input-group">
       <label>חתימת הלקוח</label>
-      <div style={{ border: "2px solid black", width: '70%', height: 200 }}>
+      <div style={{ border: "2px solid black", width: "70%", height: 200 }}>
         <SignatureCanvas
           ref={signature}
           canvasProps={{
-            width: 500,
-            height: 200,
             className: "sigCanvas",
           }}
           onEnd={() => setValue("signature", signature.current.toDataURL())}
         />
       </div>
       <Button
-        onClick={() => {signature.current.clear()
+        onClick={() => {
+          signature.current.clear();
           setValue("signature", "");
         }}
         variant="contained"
