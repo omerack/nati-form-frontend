@@ -4,7 +4,7 @@ import logo from "../logo.jpg";
 
 function Submit() {
   return (
-    <div className="container">
+    <div className="submit-container">
       <h2>תודה רבה, הפרטים נשלחו וניצור איתך קשר.</h2>
       <div>
         <img src={logo} alt="form" className="img" />
