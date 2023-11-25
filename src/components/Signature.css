@@ -1,0 +1,19 @@
+.section {
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 10px;
+}
+
+.sig-container {
+  border: 2px solid black;
+  width: 70%;
+  height: 200px;
+  margin-bottom: 15px;
+}
+
+.sigCanvas {
+  width: 100%;
+  height: 100%;
+}
