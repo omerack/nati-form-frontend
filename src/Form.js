@@ -10,18 +10,20 @@ import axios from "axios";
 import "./Form.css";
 
 function Form() {
-  const methods = useForm({
-    defaultValues: {
-      name: "עומר",
-      lastName: "אקרמן",
-      id: "204942049",
-      phone: "0546229546",
-      city: "תל אביב",
-      street: "הנהלה",
-      streetNumber: "123",
-      email: "omeracker1@gmail.com",
-    },
-  });
+  const methods = useForm();
+
+  // {
+  //   defaultValues: {
+  //     name: "עומר",
+  //     lastName: "אקרמן",
+  //     id: "204942049",
+  //     phone: "0546229546",
+  //     city: "תל אביב",
+  //     street: "הנהלה",
+  //     streetNumber: "123",
+  //     email: "omeracker1@gmail.com",
+  //   },
+  // }
 
   const [loading, setLoading] = useState(false);
   // const navigate = useNavigate();
