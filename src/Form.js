@@ -6,7 +6,7 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import axios from "axios";
-import logo from "./logo.png";
+// import logo from "./logo.png";
 import "./Form.css";
 
 function Form() {
@@ -26,6 +26,7 @@ function Form() {
   const [loading, setLoading] = useState(false);
   // const navigate = useNavigate();
   const { handleSubmit } = methods;
+
   const onSubmit = async (data) => {
     setLoading(true);
     try {
@@ -47,9 +48,9 @@ function Form() {
 
   return (
     <div className="form-container">
-      <div className="div-img">
+      {/* <div className="div-img">
         <img src={logo} alt="form" className="img" />
-      </div>
+      </div> */}
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="section">

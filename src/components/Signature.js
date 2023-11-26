@@ -14,7 +14,7 @@ function Signature() {
   return (
     <div className="section">
       <label>חתימת הלקוח</label>
-      <div style={{ border: "2px solid black", width: "70%", height: 200 }}>
+      <div style={{ border: "2px solid black", width: "50%", height: 100 }}>
         <SignatureCanvas
           ref={signature}
           canvasProps={{

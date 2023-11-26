@@ -8,7 +8,7 @@ function Genus() {
 
   return (
     <div>
-      <label style={{ marginRight: "25px", marginBottom: "15px" }}>מין</label>
+      <label style={{ marginRight: "25px", marginBottom: "15px", marginTop: "15px" }}>מין</label>
       <RadioGroup
         aria-labelledby="demo-radio-buttons-group-label"
         defaultValue="female"

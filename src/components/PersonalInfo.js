@@ -1,9 +1,11 @@
 import { TextField } from "@mui/material";
 import { useFormContext } from "react-hook-form";
+import Alert from "@mui/material/Alert";
 import Genus from "./Genus";
 
 function PersonalInfo() {
-  const { register } = useFormContext();
+  const { register, formState } = useFormContext();
+  const { errors } = formState;
 
   return (
     <div>
@@ -11,7 +13,7 @@ function PersonalInfo() {
         <label>פרטים אישיים</label>
         <TextField
           margin="normal"
-          sx={{ ml: 1, mb: 4, width: 350 }}
+          sx={{ ml: 1, width: 350 }}
           // style={{ marginLeft: "10px", width: "350px" }}
           id="outlined-basic"
           label="שם פרטי"
@@ -30,8 +32,12 @@ function PersonalInfo() {
             required: "נא למלא את שם המשפחה",
           })}
         />
+        {errors.name && <Alert severity="error">{errors.name.message}</Alert>}
+        {errors.lastName && (
+          <Alert severity="error">{errors.lastName.message}</Alert>
+        )}
         <TextField
-          sx={{ ml: 1, mb: 4, width: 350 }}
+          sx={{ ml: 1, mt: 4, width: 350 }}
           inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
           id="outlined-basic"
           label="תעודת זהות"
@@ -49,7 +55,7 @@ function PersonalInfo() {
         />
         <TextField
           InputProps={{}}
-          style={{ width: "350px" }}
+          sx={{ mt: 4, width: "350px" }}
           id="outlined-basic"
           label="מספר טלפון"
           variant="outlined"
@@ -64,22 +70,25 @@ function PersonalInfo() {
             },
           })}
         />
+        {errors.id && <Alert severity="error">{errors.id.message}</Alert>}
+        {errors.phone && <Alert severity="error">{errors.phone.message}</Alert>}
         <Genus />
         <label>דוא"ל</label>
         <TextField
           id="outlined-basic"
           label="someone@example.com"
           variant="outlined"
-          style={{ width: "350px" }}
+          sx={{ width: "350px" }}
           {...register("email", {
             required: "נא למלא את הדואל",
             pattern: {
               value:
                 /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-              message: "בעיה באימייל",
+              message: "אימייל לא תקני",
             },
           })}
         />
+        {errors.email && <Alert severity="error">{errors.email.message}</Alert>}
         <label style={{ margin: "25px 0" }}>כתובת מגורים</label>
         <TextField
           style={{ width: "300px", marginLeft: "10px", marginBottom: "20px" }}
@@ -113,6 +122,13 @@ function PersonalInfo() {
             required: "נא למלא את שם העיר",
           })}
         />
+        {errors.street && (
+          <Alert severity="error">{errors.street.message}</Alert>
+        )}
+        {errors.city && <Alert severity="error">{errors.city.message}</Alert>}
+        {errors.streetNumber && (
+          <Alert severity="error">{errors.streetNumber.message}</Alert>
+        )}
       </div>
     </div>
   );
