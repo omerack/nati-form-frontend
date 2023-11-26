@@ -32,7 +32,7 @@ function Form() {
     try {
       console.log(data);
 
-      await axios.post(`http://localhost:3001/view`, data, {
+      await axios.post(`https://nati-form-backend.onrender.com/view`, data, {
         headers: {
           "Content-Type": "application/json",
         },
