@@ -10,18 +10,20 @@ import axios from "axios";
 import "./Form.css";
 
 function Form() {
-  const methods = useForm({
-    defaultValues: {
-      name: "עומר",
-      lastName: "אקרמן",
-      id: "204942049",
-      phone: "0546229546",
-      city: "תל אביב",
-      street: "הנהלה",
-      streetNumber: "123",
-      email: "omeracker1@gmail.com",
-    },
-  });
+  const methods = useForm();
+
+  // {
+  //   defaultValues: {
+  //     name: "עומר אקרמן",
+  //     lastName: "אקרמן",
+  //     id: "204942049",
+  //     phone: "0546229546",
+  //     city: "תל אביב",
+  //     street: "הנהלה",
+  //     streetNumber: "123",
+  //     email: "omeracker1@gmail.com",
+  //   },
+  // }
 
   const [loading, setLoading] = useState(false);
   // const navigate = useNavigate();
@@ -32,15 +34,11 @@ function Form() {
     try {
       // console.log(data);
 
-      const res = await axios.post(
-        `https://nati-form-back.onrender.com/submit`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await axios.post(`http://localhost:3001/submit`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       console.log(res);
       console.log("success");
       // const id = data.id;
