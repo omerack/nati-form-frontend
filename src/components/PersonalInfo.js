@@ -11,31 +11,20 @@ function PersonalInfo() {
     <div>
       <div className="input-group">
         <label>פרטים אישיים</label>
-        <TextField
-          margin="normal"
-          sx={{ ml: 1, width: 350 }}
-          // style={{ marginLeft: "10px", width: "350px" }}
-          id="outlined-basic"
-          label="שם פרטי"
-          variant="outlined"
-          {...register("name", {
-            required: "נא למלא את השם  פרטי",
-          })}
-        />
-        <TextField
-          margin="normal"
-          sx={{ width: 350 }}
-          id="outlined-basic"
-          label="שם משפחה"
-          variant="outlined"
-          {...register("lastName", {
-            required: "נא למלא את שם המשפחה",
-          })}
-        />
-        {errors.name && <Alert severity="error">{errors.name.message}</Alert>}
-        {errors.lastName && (
-          <Alert severity="error">{errors.lastName.message}</Alert>
-        )}
+        <div>
+          <TextField
+            margin="normal"
+            sx={{ ml: 1, width: 350 }}
+            // style={{ marginLeft: "10px", width: "350px" }}
+            id="outlined-basic"
+            label="שם מלא"
+            variant="outlined"
+            {...register("name", {
+              required: "נא למלא שם פרטי ומשפחה",
+            })}
+          />
+          {errors.name && <Alert severity="error">{errors.name.message}</Alert>}
+        </div>
         <TextField
           sx={{ ml: 1, mt: 4, width: 350 }}
           inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}

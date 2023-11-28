@@ -30,13 +30,18 @@ function Form() {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      console.log(data);
+      // console.log(data);
 
-      await axios.post(`https://nati-form-back.onrender.com/submit`, data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await axios.post(
+        `http://localhost:3001/submit`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(res);
       console.log("success");
       // const id = data.id;
       // navigate(`/review/${id}`);
