@@ -33,7 +33,7 @@ function Form() {
       // console.log(data);
 
       const res = await axios.post(
-        `http://localhost:3001/submit`,
+        `https://nati-form-back.onrender.com/submit`,
         data,
         {
           headers: {
