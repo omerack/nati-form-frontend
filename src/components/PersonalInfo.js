@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -27,9 +26,7 @@ function PersonalInfo({ register, errors }) {
           id="outlined-basic"
           label="שם פרטי"
           variant="outlined"
-          {...register("name", {
-            required: "נא למלא את השם  פרטי",
-          })}
+          {...register("name")}
         />
         <TextField
           margin="normal"

@@ -37,6 +37,23 @@ function Review() {
           ></iframe>
         </div>
         <div className="container">
+          <iframe
+            src={`https://gilad-form-backend.onrender.com/bituah-leumi/${id}`}
+            width="80%"
+            height="700"
+            title="form review"
+          ></iframe>
+        </div>
+        <div className="container">
+          <iframe
+            src={`https://gilad-form-backend.onrender.com/agreement/${id}`}
+            width="80%"
+            height="700"
+            title="form review"
+          ></iframe>
+        </div>
+
+        <div className="container">
           <Button
             type="submit"
             variant="contained"

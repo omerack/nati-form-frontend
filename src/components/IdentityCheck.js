@@ -18,6 +18,9 @@ export default function IdentityCheck({ errors, register }) {
         <Typography variant="h7" gutterBottom>
           נא לצרף רק קבצי pdf, png, jpg
         </Typography>
+        <Typography variant="h7" gutterBottom>
+          נא לצרף צילום ת.ז עם ספח
+        </Typography>
         <FileUpload />
         <Signature />
         <FormControlLabel

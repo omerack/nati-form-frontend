@@ -20,8 +20,8 @@ function Signature() {
           ref={signature}
           canvasProps={{
             className: "sigCanvas",
-          }}
-          onEnd={() => setValue("signature", signature.current.toDataURL())}
+          }} onEnd={() => setValue("signature", signature.current.toDataURL())}
+         
         />
       </div>
       <Button

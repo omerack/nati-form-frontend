@@ -62,7 +62,6 @@ function contact({ register, errors }) {
               required: "נא למלא את הרחוב",
             })}
           />
-
           <TextField
             style={{ width: "100px", marginLeft: "20px" }}
             id="outlined-basic"
@@ -76,7 +75,6 @@ function contact({ register, errors }) {
               },
             })}
           />
-
           <TextField
             style={{ width: "200px" }}
             id="outlined-basic"
