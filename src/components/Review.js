@@ -38,7 +38,7 @@ function Review() {
         </div>
         <div className="container">
           <iframe
-            src={`https://gilad-form-backend.onrender.com/bituah-leumi/${id}`}
+            src={`https://gilad-form-backend.onrender.com/bituahLeumi/${id}`}
             width="80%"
             height="700"
             title="form review"
@@ -51,8 +51,7 @@ function Review() {
             height="700"
             title="form review"
           ></iframe>
-        </div>
-
+        </div>    
         <div className="container">
           <Button
             type="submit"
