@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import IdentityCheck from "../components/IdentityCheck";
 import PersonalInfo from "../components/PersonalInfo";
 import Contact from "../components/Contact";
-import { DevTool } from "@hookform/devtools";
+// import { DevTool } from "@hookform/devtools";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useForm, FormProvider } from "react-hook-form";
@@ -26,7 +26,7 @@ function Form() {
     },
   });
 
-  const { register, control, handleSubmit, formState } = methods;
+  const { register, handleSubmit, formState } = methods;
   const { errors } = formState;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -84,7 +84,7 @@ function Form() {
         </form>
       </FormProvider>
 
-      <DevTool control={control} />
+      {/* <DevTool control={control} /> */}
     </>
   );
 }

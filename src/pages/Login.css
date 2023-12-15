@@ -5,7 +5,7 @@
   height: 100vh;
 }
 
-form {
+.login-form-container {
   width: 350px; /* Adjust the width as needed */
   padding: 20px;
   border: 1px solid #ccc;
@@ -25,6 +25,6 @@ div {
 }
 
 /* Optional: Style the submit button */
-Button {
+.login-form-container Button {
   width: 100%;
 }

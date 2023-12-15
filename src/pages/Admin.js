@@ -3,14 +3,17 @@ import { Button, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import { useFormContext } from "react-hook-form";
 import { useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 import "./Admin.css";
 
 function Admin() {
   const { logoutUser } = useAuth();
   const { register, handleSubmit } = useFormContext();
   const [iframeKey, setIframeKey] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const financialReportSubmit = async (data) => {
+    setLoading(true);
     try {
       console.log(data);
       await axios.post(
@@ -26,9 +29,12 @@ function Admin() {
       console.log("success");
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
   const BookKeepingSubmit = async (data) => {
+    setLoading(true);
     try {
       console.log(data);
       await axios.post(
@@ -44,6 +50,8 @@ function Admin() {
       console.log("success");
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -58,7 +66,7 @@ function Admin() {
         onSubmit={handleSubmit(financialReportSubmit)}
         noValidate
         encType="multipart/form-data"
-        className="form-container"
+        className="admin-form-container"
       >
         <div className="input-container">
           <Typography variant="h5">
@@ -70,6 +78,7 @@ function Admin() {
             label="הכנס סכום לשינוי"
             {...register("financialReportFee")}
           ></TextField>
+          {loading && <ClipLoader color="#1976d2" />}
           <Button type="submit" variant="contained" color="primary">
             SEND
           </Button>
@@ -88,7 +97,7 @@ function Admin() {
         onSubmit={handleSubmit(BookKeepingSubmit)}
         noValidate
         encType="multipart/form-data"
-        className="form-container"
+        className="admin-form-container"
       >
         <div className="input-container">
           <Typography variant="h5">הסכם שירות דוח כספי טמפלט</Typography>
@@ -98,6 +107,7 @@ function Admin() {
             label="הכנס סכום לשינוי"
             {...register("BookKeepingFee")}
           ></TextField>
+          {loading && <ClipLoader color="#1976d2" />}
           <Button type="submit" variant="contained" color="primary">
             SEND
           </Button>

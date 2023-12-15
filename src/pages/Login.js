@@ -28,7 +28,7 @@ function Login() {
 
   return (
     <div className="login-container">
-      <form ref={loginForm} onSubmit={handleSubmit} >
+      <form ref={loginForm} onSubmit={handleSubmit} className="login-form-container">
         <Typography variant="h5" gutterBottom>
           התחברות
         </Typography>
