@@ -1,19 +1,30 @@
-import "./Forms.css";
+import "./Form.css";
 import logo from "../logo.jpg";
 import { useState } from "react";
 import Typography from "@mui/material/Typography";
-import IdentityCheck from "./IdentityCheck";
-import PersonalInfo from "./PersonalInfo";
-import Contact from "./Contact";
-// import { DevTool } from "@hookform/devtools";
+import IdentityCheck from "../components/IdentityCheck";
+import PersonalInfo from "../components/PersonalInfo";
+import Contact from "../components/Contact";
+import { DevTool } from "@hookform/devtools";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 
-function Forms() {
-  const methods = useForm();
+function Form() {
+  const methods = useForm({
+    defaultValues: {
+      name: "עומר",
+      lastName: "אקרמן",
+      id: "204942049",
+      phone: "0546229546",
+      email: "omeracker1@gmail.com",
+      street: "יהודה הלוי",
+      streetNumber: "12",
+      city: "נתניה",
+    },
+  });
 
   const { register, control, handleSubmit, formState } = methods;
   const { errors } = formState;
@@ -50,7 +61,7 @@ function Forms() {
           encType="multipart/form-data"
         >
           <Typography variant="h3" gutterBottom>
-            פרטי לקוח עצמאי חדש
+            פרטי לקוח חדש
           </Typography>
           <div className="section">
             <Typography variant="h5" gutterBottom>
@@ -58,11 +69,7 @@ function Forms() {
             </Typography>
           </div>
           <div className="section">
-            <PersonalInfo
-              register={register}
-              errors={errors}
-              control={control}
-            />
+            <PersonalInfo register={register} errors={errors} />
           </div>
           <div className="section">
             <Contact register={register} errors={errors} />
@@ -75,11 +82,11 @@ function Forms() {
           </Button>
           {loading && <ClipLoader color="#1976d2" />}
         </form>
-        {/* <DevTool control={control} /> */}
       </FormProvider>
-      <form action="/submit" method="get"></form>
+
+      <DevTool control={control} />
     </>
   );
 }
 
-export default Forms;
+export default Form;

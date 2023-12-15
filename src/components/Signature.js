@@ -3,7 +3,7 @@ import SignatureCanvas from "react-signature-canvas";
 import { useFormContext } from "react-hook-form";
 import { Button } from "@mui/material";
 import Alert from "@mui/material/Alert";
-import "./Forms.css";
+import "../pages/Form.css";
 
 function Signature() {
   const signature = useRef();
@@ -20,8 +20,8 @@ function Signature() {
           ref={signature}
           canvasProps={{
             className: "sigCanvas",
-          }} onEnd={() => setValue("signature", signature.current.toDataURL())}
-         
+          }}
+          onEnd={() => setValue("signature", signature.current.toDataURL())}
         />
       </div>
       <Button

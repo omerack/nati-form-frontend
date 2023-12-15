@@ -1,0 +1,30 @@
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+form {
+  width: 350px; /* Adjust the width as needed */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Optional: Add some spacing between form elements */
+div {
+  margin-bottom: 16px;
+}
+
+/* Optional: Style the submit button */
+Button {
+  width: 100%;
+}
