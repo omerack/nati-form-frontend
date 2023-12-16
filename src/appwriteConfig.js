@@ -9,11 +9,3 @@ client
 export const account = new Account(client);
 
 export default client;
-
-// const promise = account.createEmailSession('email@example.com', 'password');
-
-// promise.then(function (response) {
-//     console.log(response); // Success
-// }, function (error) {
-//     console.log(error); // Failure
-// });

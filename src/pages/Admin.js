@@ -17,7 +17,7 @@ function Admin() {
     try {
       console.log(data);
       await axios.post(
-        `https://gilad-form-backend.onrender.com/financialReport/changeFee`,
+        `http://localhost:3001/financialReport/changeFee`,
         data,
         {
           headers: {
@@ -37,15 +37,11 @@ function Admin() {
     setLoading(true);
     try {
       console.log(data);
-      await axios.post(
-        `https://gilad-form-backend.onrender.com/BookKeeping/changeFee`,
-        data,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.post(`http://localhost:3001/BookKeeping/changeFee`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       setIframeKey((prevKey) => prevKey + 1);
       console.log("success");
     } catch (error) {
@@ -86,7 +82,7 @@ function Admin() {
         <div className="container">
           <iframe
             key={iframeKey}
-            src={`https://gilad-form-backend.onrender.com/financialReport`}
+            src={`http://localhost:3001/financialReport`}
             width="80%"
             height="700"
             title="form review"
@@ -115,14 +111,16 @@ function Admin() {
         <div className="container">
           <iframe
             key={iframeKey}
-            src={`https://gilad-form-backend.onrender.com/BookKeeping`}
+            src={`http://localhost:3001/BookKeeping`}
             width="80%"
             height="700"
             title="form review"
           ></iframe>
         </div>
       </form>
-      <div></div>
+      <Button type="submit" variant="contained" color="primary">
+        צור הרשמה
+      </Button>
     </div>
   );
 }
