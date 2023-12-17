@@ -1,7 +1,7 @@
 import PersonalInfo from "./components/PersonalInfo";
 import Signature from "./components/Signature";
 import { useForm, FormProvider } from "react-hook-form";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -26,7 +26,7 @@ function Form() {
   // }
 
   const [loading, setLoading] = useState(false);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { handleSubmit } = methods;
 
   const onSubmit = async (data) => {
@@ -34,19 +34,15 @@ function Form() {
     try {
       // console.log(data);
 
-      const res = await axios.post(
-        `https://nati-form-back.onrender.com/submit`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await axios.post(`http://localhost:3001/submit`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       console.log(res);
       console.log("success");
       // const id = data.id;
-      // navigate(`/review/${id}`);
+      navigate(`/submit`);
     } catch (error) {
       console.error(error);
     } finally {

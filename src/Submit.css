@@ -1,0 +1,12 @@
+.submit-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 100px auto;
+  padding: 5%;
+  text-align: center;
+  /* display: inline-block; */
+}
+.img {
+  width: 70%;
+  height: 300px;
+}
