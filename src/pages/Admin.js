@@ -1,56 +1,21 @@
 import { useAuth } from "../utils/AuthContext";
 import { Button, TextField, Typography } from "@mui/material";
-import axios from "axios";
 import { useFormContext } from "react-hook-form";
-import { useState } from "react";
-import ClipLoader from "react-spinners/ClipLoader";
 import "./Admin.css";
 
 function Admin() {
-  const { logoutUser } = useAuth();
-  const { register, handleSubmit } = useFormContext();
-  const [iframeKey, setIframeKey] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const { logoutUser, createId } = useAuth();
+  const { register } = useFormContext();
 
-  const financialReportSubmit = async (data) => {
-    setLoading(true);
-    try {
-      console.log(data);
-      await axios.post(
-        `http://localhost:3001/financialReport/changeFee`,
-        data,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      setIframeKey((prevKey) => prevKey + 1);
-      console.log("success");
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+  const handleSubmit = async (data) => {
+    const createIdResponse = await createId(
+      data.id,
+      data.financialReportFee,
+      data.BookKeepingFee
+    );
+    console.log(createIdResponse);
+    console.log("success");
   };
-  const BookKeepingSubmit = async (data) => {
-    setLoading(true);
-    try {
-      console.log(data);
-      await axios.post(`http://localhost:3001/BookKeeping/changeFee`, data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      setIframeKey((prevKey) => prevKey + 1);
-      console.log("success");
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div>
       <div className="logout-container">
@@ -58,7 +23,47 @@ function Admin() {
           LogOut
         </Button>
       </div>
-      <form
+      <form onSubmit={handleSubmit} className="admin-form-container">
+        <div className="input-container">
+          <Typography variant="h5">
+            הסכם התקשרות שירותי ביקורת דוחות כספיים
+          </Typography>
+          <TextField
+            sx={{ mb: "10px" }}
+            size="small"
+            label="הכנס סכום לשינוי"
+            {...register("financialReportFee")}
+          ></TextField>
+        </div>
+        <div className="input-container">
+          <Typography variant="h5">הסכם שירות דוח כספי</Typography>
+          <TextField
+            sx={{ mb: "10px" }}
+            size="small"
+            label="הכנס סכום לשינוי"
+            {...register("BookKeepingFee")}
+          ></TextField>
+        </div>
+        <div className="input-container">
+          <Typography variant="h5">תעודת זהות</Typography>
+          <TextField
+            sx={{ mb: "10px" }}
+            size="small"
+            label="הכנס תעודת זהות"
+            {...register("id")}
+          ></TextField>
+        </div>
+        <Button variant="contained" color="primary" type="submit">
+          צור הרשמה
+        </Button>
+      </form>
+    </div>
+  );
+}
+
+export default Admin;
+
+/* <form
         onSubmit={handleSubmit(financialReportSubmit)}
         noValidate
         encType="multipart/form-data"
@@ -117,12 +122,4 @@ function Admin() {
             title="form review"
           ></iframe>
         </div>
-      </form>
-      <Button type="submit" variant="contained" color="primary">
-        צור הרשמה
-      </Button>
-    </div>
-  );
-}
-
-export default Admin;
+      </form> */

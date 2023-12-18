@@ -1,5 +1,7 @@
 import { createContext, useState, useEffect, useContext } from "react";
-import { account } from "../appwriteConfig";
+import { account, databases } from "../appwriteConfig";
+import { ID } from "appwrite";
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -33,8 +35,6 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  const registerUser = async (userInfo) => {};
-
   const checkUserStatus = async () => {
     try {
       let accountDetails = await account.get();
@@ -46,11 +46,32 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   };
 
+  const createId = async (id, financialReportFee, BookKeepingFee) => {
+    return databases.createDocument(
+      "657e3ac8dce6af4d5892",
+      "657f0b3382c39de81a75",
+      ID.unique(),
+      {
+        id: id,
+        financialReportFee: financialReportFee,
+        BookKeepingFee: BookKeepingFee,
+      }
+    );
+  };
+
+  const findId = async (id) => {
+    return databases.listDocuments(
+      "657e3ac8dce6af4d5892",
+      "657f0b3382c39de81a75"
+    );
+  };
+
   const contextData = {
     user,
     loginUser,
     logoutUser,
-    registerUser,
+    createId,
+    findId,
   };
 
   return (
