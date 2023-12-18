@@ -11,8 +11,8 @@ import { Button } from "@mui/material";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
-import { useAuth } from "../utils/AuthContext";
-import { Alert } from "@mui/material";
+// import { useAuth } from "../utils/AuthContext";
+// import { Alert } from "@mui/material";
 
 function Form() {
   const methods = useForm({
@@ -32,34 +32,34 @@ function Form() {
   const { errors } = formState;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const { findId } = useAuth();
-  const [isconfirmed, setIsConfirmed] = useState(false);
+  // const { findId } = useAuth();
+  // const [isconfirmed, setIsConfirmed] = useState(false);
 
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      let BookKeepingFee = null;
-      let financialReportFee = null;
+      // let BookKeepingFee = null;
+      // let financialReportFee = null;
 
-      const findIdResponse = await findId(data);
-      const found = findIdResponse.documents.some((document) => {
-        if (document.id === data.id) {
-          BookKeepingFee = document.BookKeepingFee;
-          financialReportFee = document.financialReportFee;
-          return true;
-        }
-        return false;
-      });
+      // const findIdResponse = await findId(data);
+      // const found = findIdResponse.documents.some((document) => {
+      //   if (document.id === data.id) {
+      //     BookKeepingFee = document.BookKeepingFee;
+      //     financialReportFee = document.financialReportFee;
+      //     return true;
+      //   }
+      //   return false;
+      // });
 
-      if (!found) {
-        setIsConfirmed(true);
-        return;
-      } else {
-        data.BookKeepingFee = BookKeepingFee;
-        data.financialReportFee = financialReportFee;
-      }
-      console.log(data);
-      await axios.post(`http://localhost:3001/view`, data, {
+      // if (!found) {
+      //   setIsConfirmed(true);
+      //   return;
+      // } else {
+      //   data.BookKeepingFee = BookKeepingFee;
+      //   data.financialReportFee = financialReportFee;
+      // }
+      // console.log(data);
+      await axios.post(`https://gilad-form-backend.onrender.com/view`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -67,7 +67,7 @@ function Form() {
 
       const id = data.id;
       navigate(`/review/${id}`);
-      console.log("success");
+      // console.log("success");
     } catch (error) {
       console.error(error);
     } finally {
@@ -102,11 +102,11 @@ function Form() {
           <Button type="submit" variant="contained" color="primary">
             הבא
           </Button>
-          {isconfirmed && (
+          {/* {isconfirmed && (
             <Alert severity="error">
               לא קיבלת אישור אנא פנה למשרד רואי החשבון
             </Alert>
-          )}
+          )} */}
           {loading && <ClipLoader color="#1976d2" />}
         </form>
       </FormProvider>
