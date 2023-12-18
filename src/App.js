@@ -4,7 +4,7 @@ import Submit from "./pages/Submit";
 // import Login from "./pages/Login";
 // import Admin from "./pages/Admin";
 // import PrivateRoutes from "./utils/PrivateRoutes";
-import { AuthProvider } from "./utils/AuthContext";
+// import { AuthProvider } from "./utils/AuthContext";
 import { useForm, FormProvider } from "react-hook-form";
 import {
   createBrowserRouter,
@@ -33,9 +33,9 @@ function App() {
   return (
     <div>
       <FormProvider {...methods}>
-        <AuthProvider>
+        {/* <AuthProvider> */}
           <RouterProvider router={router} />
-        </AuthProvider>
+        {/* </AuthProvider> */}
       </FormProvider>
     </div>
   );
