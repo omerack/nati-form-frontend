@@ -11,65 +11,67 @@ import { Button } from "@mui/material";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
-// import { useAuth } from "../utils/AuthContext";
-// import { Alert } from "@mui/material";
+import { useAuth } from "../utils/AuthContext";
+import { Alert } from "@mui/material";
 
 function Form() {
-  const methods = useForm();
-
-  // {
-  //   defaultValues: {
-  //     name: "עומר",
-  //     lastName: "אקרמן",
-  //     id: "204942049",
-  //     phone: "0546229546",
-  //     email: "omeracker1@gmail.com",
-  //     street: "יהודה הלוי",
-  //     streetNumber: "12",
-  //     city: "נתניה",
-  //   },
-  // }
+  const methods = useForm({
+    defaultValues: {
+      name: "עומר",
+      lastName: "אקרמן",
+      id: "204942049",
+      phone: "0546229546",
+      email: "omeracker1@gmail.com",
+      street: "יהודה הלוי",
+      streetNumber: "12",
+      city: "נתניה",
+    },
+  });
 
   const { register, handleSubmit, formState } = methods;
   const { errors } = formState;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  // const { findId } = useAuth();
-  // const [isconfirmed, setIsConfirmed] = useState(false);
+  const { listId } = useAuth();
+  const [isconfirmed, setIsConfirmed] = useState(false);
 
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      // let BookKeepingFee = null;
-      // let financialReportFee = null;
+      let BookKeepingFee = null;
+      let financialReportFee = null;
 
-      // const findIdResponse = await findId(data);
-      // const found = findIdResponse.documents.some((document) => {
-      //   if (document.id === data.id) {
-      //     BookKeepingFee = document.BookKeepingFee;
-      //     financialReportFee = document.financialReportFee;
-      //     return true;
-      //   }
-      //   return false;
-      // });
-
-      // if (!found) {
-      //   setIsConfirmed(true);
-      //   return;
-      // } else {
-      //   data.BookKeepingFee = BookKeepingFee;
-      //   data.financialReportFee = financialReportFee;
-      // }
-      // console.log(data);
-      await axios.post(`https://gilad-form-backend.onrender.com/view`, data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      const listIdResponse = await listId(data);
+      const found = listIdResponse.documents.some((document) => {
+        if (document.id === data.id) {
+          BookKeepingFee = document.BookKeepingFee;
+          financialReportFee = document.financialReportFee;
+          return true;
+        }
+        return false;
       });
+
+      if (!found) {
+        setIsConfirmed(true);
+        return;
+      } else {
+        data.BookKeepingFee = BookKeepingFee;
+        data.financialReportFee = financialReportFee;
+      }
+      console.log(data);
+      await axios.post(
+        `https://gilad-form-backend.onrender.com/view`,
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       const id = data.id;
       navigate(`/review/${id}`);
-      // console.log("success");
+      console.log("success");
     } catch (error) {
       console.error(error);
     } finally {
@@ -104,11 +106,11 @@ function Form() {
           <Button type="submit" variant="contained" color="primary">
             הבא
           </Button>
-          {/* {isconfirmed && (
+          {isconfirmed && (
             <Alert severity="error">
               לא קיבלת אישור אנא פנה למשרד רואי החשבון
             </Alert>
-          )} */}
+          )}
           {loading && <ClipLoader color="#1976d2" />}
         </form>
       </FormProvider>

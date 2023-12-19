@@ -1,20 +1,29 @@
 import { useAuth } from "../utils/AuthContext";
 import { Button, TextField, Typography } from "@mui/material";
 import { useFormContext } from "react-hook-form";
+import Alert from "@mui/material/Alert";
 import "./Admin.css";
+import Dashboard from "../components/Dashboard";
+import { useState } from "react";
 
 function Admin() {
   const { logoutUser, createId } = useAuth();
-  const { register } = useFormContext();
+  const { register, formState, handleSubmit } = useFormContext();
+  const { errors } = formState;
+  const [documents, setDocuments] = useState([]);
 
-  const handleSubmit = async (data) => {
-    const createIdResponse = await createId(
-      data.id,
-      data.financialReportFee,
-      data.BookKeepingFee
-    );
-    console.log(createIdResponse);
-    console.log("success");
+  const onSubmit = async (data) => {
+    try {
+      const createIdResponse = await createId(
+        data.id,
+        data.financialReportFee,
+        data.BookKeepingFee
+      );
+      console.log(createIdResponse);
+      console.log("success");
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div>
@@ -23,7 +32,7 @@ function Admin() {
           LogOut
         </Button>
       </div>
-      <form onSubmit={handleSubmit} className="admin-form-container">
+      <form onSubmit={handleSubmit(onSubmit)} className="admin-form-container">
         <div className="input-container">
           <Typography variant="h5">
             הסכם התקשרות שירותי ביקורת דוחות כספיים
@@ -50,76 +59,35 @@ function Admin() {
             sx={{ mb: "10px" }}
             size="small"
             label="הכנס תעודת זהות"
-            {...register("id")}
-          ></TextField>
+            {...register("id", {
+              required: "נא למלא את תעודת הזהות",
+              validate: {
+                length: (fieldValue) => {
+                  return (
+                    fieldValue.length === 9 || "תעודת הזהות חייבת להיות 9 ספרות"
+                  );
+                },
+                isRegistered: (fieldValue) => {
+                  const isRegistered = documents.some((document) => {
+                    if (document.id === fieldValue) {
+                      return true;
+                    }
+                    return false;
+                  });
+                  return !isRegistered || "תעודת הזהות קיימת במערכת";
+                },
+              },
+            })}
+          />
+          {errors.id && <Alert severity="error">{errors.id.message}</Alert>}
         </div>
         <Button variant="contained" color="primary" type="submit">
           צור הרשמה
         </Button>
       </form>
+      <Dashboard documents={documents} setDocuments={setDocuments} />
     </div>
   );
 }
 
 export default Admin;
-
-/* <form
-        onSubmit={handleSubmit(financialReportSubmit)}
-        noValidate
-        encType="multipart/form-data"
-        className="admin-form-container"
-      >
-        <div className="input-container">
-          <Typography variant="h5">
-            הסכם התקשרות שירותי ביקורת דוחות כספיים
-          </Typography>
-          <TextField
-            sx={{ mb: "10px" }}
-            size="small"
-            label="הכנס סכום לשינוי"
-            {...register("financialReportFee")}
-          ></TextField>
-          {loading && <ClipLoader color="#1976d2" />}
-          <Button type="submit" variant="contained" color="primary">
-            SEND
-          </Button>
-        </div>
-        <div className="container">
-          <iframe
-            key={iframeKey}
-            src={`https://gilad-form-backend.onrender.com/financialReport`}
-            width="80%"
-            height="700"
-            title="form review"
-          ></iframe>
-        </div>
-      </form>
-      <form
-        onSubmit={handleSubmit(BookKeepingSubmit)}
-        noValidate
-        encType="multipart/form-data"
-        className="admin-form-container"
-      >
-        <div className="input-container">
-          <Typography variant="h5">הסכם שירות דוח כספי טמפלט</Typography>
-          <TextField
-            sx={{ mb: "10px" }}
-            size="small"
-            label="הכנס סכום לשינוי"
-            {...register("BookKeepingFee")}
-          ></TextField>
-          {loading && <ClipLoader color="#1976d2" />}
-          <Button type="submit" variant="contained" color="primary">
-            SEND
-          </Button>
-        </div>
-        <div className="container">
-          <iframe
-            key={iframeKey}
-            src={`https://gilad-form-backend.onrender.com/BookKeeping`}
-            width="80%"
-            height="700"
-            title="form review"
-          ></iframe>
-        </div>
-      </form> */
