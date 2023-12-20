@@ -66,7 +66,7 @@ function Dashboard({ documents, setDocuments }) {
   ];
 
   return (
-    <Box sx={{ height: 400, width: "60%", margin: "auto" }}>
+    <Box sx={{ height: 400, width: "50%", margin: "auto" }}>
       <DataGrid
         rows={documents}
         columns={columns}

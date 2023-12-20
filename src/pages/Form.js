@@ -59,15 +59,11 @@ function Form() {
         data.financialReportFee = financialReportFee;
       }
       console.log(data);
-      await axios.post(
-        `https://gilad-form-backend.onrender.com/view`,
-        data,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.post(`http://localhost:3001/view`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       const id = data.id;
       navigate(`/review/${id}`);

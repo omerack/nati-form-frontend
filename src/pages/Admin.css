@@ -20,11 +20,11 @@
   padding: 10px;
 }
 .logout-container button {
-  width: 100px; /* Adjust the width as needed */
+  width: 100px;
 }
 
 .admin-form-container {
-  width: 80%; /* Adjust the width as needed */
+  width: 50%; 
   margin: 30px auto;
   padding: 20px;
   border: 1px solid #ccc;
