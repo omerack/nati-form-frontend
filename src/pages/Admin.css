@@ -24,7 +24,7 @@
 }
 
 .admin-form-container {
-  width: 50%; 
+  width: 50%;
   margin: 30px auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -34,11 +34,10 @@
 }
 
 .data-grid-container {
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid black;
   padding: 20px;
   margin: 20px;
-  
 }

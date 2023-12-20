@@ -1,8 +1,8 @@
 import { useAuth } from "../utils/AuthContext";
 import { Button, TextField, Typography } from "@mui/material";
 import { useFormContext } from "react-hook-form";
-import Alert from "@mui/material/Alert";
 import "./Admin.css";
+import Alert from "@mui/material/Alert";
 import Dashboard from "../components/Dashboard";
 import { useState } from "react";
 
@@ -51,7 +51,7 @@ function Admin() {
             size="small"
             label="הכנס סכום לשינוי"
             {...register("BookKeepingFee")}
-          ></TextField>
+          />
         </div>
         <div className="input-container">
           <Typography variant="h5">תעודת זהות</Typography>
@@ -78,7 +78,7 @@ function Admin() {
                 },
               },
             })}
-          />
+          ></TextField>
           {errors.id && <Alert severity="error">{errors.id.message}</Alert>}
         </div>
         <Button variant="contained" color="primary" type="submit">

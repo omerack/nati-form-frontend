@@ -59,7 +59,21 @@ function Form() {
         data.financialReportFee = financialReportFee;
       }
       console.log(data);
-      await axios.post(`http://localhost:3001/view`, data, {
+      await axios.post(`https://gilad-form-backend.onrender.com/view`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (!found) {
+        setIsConfirmed(true);
+        return;
+      } else {
+        data.BookKeepingFee = BookKeepingFee;
+        data.financialReportFee = financialReportFee;
+      }
+      console.log(data);
+      await axios.post(`https://gilad-form-backend.onrender.com/view`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -67,7 +81,7 @@ function Form() {
 
       const id = data.id;
       navigate(`/review/${id}`);
-      console.log("success");
+      // console.log("success");
     } catch (error) {
       console.error(error);
     } finally {

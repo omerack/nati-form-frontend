@@ -32,7 +32,7 @@ function Login() {
         <Typography variant="h5" gutterBottom>
           התחברות
         </Typography>
-        <div className="">
+        <div>
           <label>אימייל</label>
           <TextField label="אימייל" name="email" variant="outlined" fullWidth />
         </div>

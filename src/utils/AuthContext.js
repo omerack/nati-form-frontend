@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }) => {
     );
   };
 
-  const listId = async () => {
+  const listId = async (id) => {
     return databases.listDocuments(
       "657e3ac8dce6af4d5892",
       "657f0b3382c39de81a75"
