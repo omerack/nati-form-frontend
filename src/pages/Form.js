@@ -81,7 +81,7 @@ function Form() {
 
       const id = data.id;
       navigate(`/review/${id}`);
-      // console.log("success");
+      console.log("success");
     } catch (error) {
       console.error(error);
     } finally {
