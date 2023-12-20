@@ -27,14 +27,13 @@ function Dashboard({ documents, setDocuments }) {
   };
 
   const columns = [
-    { field: "id", headerName: "תעודת זהות" },
+    { field: "id", headerName: "תעודת זהות", width: 100 },
     {
       field: "financialReportFee",
       headerName: "הסכם שירותי ביקורת דוחות כספיים",
       cellClassName: "BookKeepingFee",
       align: "center",
       headerAlign: "center",
-
       flex: 1,
     },
     {
@@ -66,7 +65,7 @@ function Dashboard({ documents, setDocuments }) {
   ];
 
   return (
-    <Box sx={{ width: { xs: '100%', sm: '50%' }, margin: 'auto' }}>
+    <Box sx={{ width: { sm: "100%", md: "50%" }, margin: "auto" }}>
       <DataGrid
         rows={documents}
         columns={columns}
