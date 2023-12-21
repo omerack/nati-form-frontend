@@ -1,7 +1,6 @@
 import { useAuth } from "../utils/AuthContext";
 import { Box, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-// import { useTheme } from "@mui/material/styles";
 import { useEffect } from "react";
 
 function Dashboard({ documents, setDocuments }) {

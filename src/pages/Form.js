@@ -3,9 +3,9 @@ import logo from "../logo.jpg";
 import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import IdentityCheck from "../components/IdentityCheck";
-import PersonalInfo from "../components/PersonalInfo";
+import WhichClient from "../components/WhichClient";
 import Contact from "../components/Contact";
-// import { DevTool } from "@hookform/devtools";
+import { DevTool } from "@hookform/devtools";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useForm, FormProvider } from "react-hook-form";
@@ -17,9 +17,10 @@ import { Alert } from "@mui/material";
 function Form() {
   const methods = useForm({
     defaultValues: {
-      name: "עומר",
-      lastName: "אקרמן",
+      name: "",
+      lastName: "",
       id: "204942049",
+      associationName: "",
       phone: "0546229546",
       email: "omeracker1@gmail.com",
       street: "יהודה הלוי",
@@ -28,7 +29,7 @@ function Form() {
     },
   });
 
-  const { register, handleSubmit, formState } = methods;
+  const { register, handleSubmit, formState, control } = methods;
   const { errors } = formState;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -59,21 +60,7 @@ function Form() {
         data.financialReportFee = financialReportFee;
       }
       console.log(data);
-      await axios.post(`https://gilad-form-backend.onrender.com/view`, data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      if (!found) {
-        setIsConfirmed(true);
-        return;
-      } else {
-        data.BookKeepingFee = BookKeepingFee;
-        data.financialReportFee = financialReportFee;
-      }
-      console.log(data);
-      await axios.post(`https://gilad-form-backend.onrender.com/view`, data, {
+      await axios.post(`http://localhost:3001/view`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -105,7 +92,7 @@ function Form() {
             פרטי לקוח חדש
           </Typography>
           <div className="section">
-            <PersonalInfo register={register} errors={errors} />
+            <WhichClient register={register} errors={errors} />
           </div>
           <div className="section">
             <Contact register={register} errors={errors} />
@@ -125,7 +112,7 @@ function Form() {
         </form>
       </FormProvider>
 
-      {/* <DevTool control={control} /> */}
+      <DevTool control={control} />
     </>
   );
 }
