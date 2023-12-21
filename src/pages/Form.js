@@ -17,10 +17,6 @@ import { Alert } from "@mui/material";
 function Form() {
   const methods = useForm({
     defaultValues: {
-      name: "",
-      lastName: "",
-      id: "204942049",
-      associationName: "",
       phone: "0546229546",
       email: "omeracker1@gmail.com",
       street: "יהודה הלוי",
@@ -60,7 +56,7 @@ function Form() {
         data.financialReportFee = financialReportFee;
       }
       console.log(data);
-      await axios.post(`http://localhost:3001/view`, data, {
+      await axios.post(`https://gilad-form-backend.onrender.com/view`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
