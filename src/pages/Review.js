@@ -21,7 +21,7 @@ function Review() {
     setLoading(true);
 
     try {
-      await axios.post(`http://localhost:3001/submit/`, {
+      await axios.post(`https://gilad-form-backend.onrender.com/submit/`, {
         id,
         name,
         lastName,
@@ -39,7 +39,7 @@ function Review() {
       <form onSubmit={handleSubmit}>
         <div className="container">
           <iframe
-            src={`http://localhost:3001/preview/${id}`}
+            src={`https://gilad-form-backend.onrender.com/preview/${id}`}
             width="80%"
             height="700"
             title="form review"
@@ -47,7 +47,7 @@ function Review() {
         </div>
         <div className="container">
           <iframe
-            src={`http://localhost:3001/bituahLeumi/${id}`}
+            src={`https://gilad-form-backend.onrender.com/bituahLeumi/${id}`}
             width="80%"
             height="700"
             title="form review"
@@ -55,7 +55,7 @@ function Review() {
         </div>
         <div className="container">
           <iframe
-            src={`http://localhost:3001/agreement/${id}`}
+            src={`https://gilad-form-backend.onrender.com/agreement/${id}`}
             width="80%"
             height="700"
             title="form review"
@@ -63,7 +63,7 @@ function Review() {
         </div>
         <div className="container">
           <iframe
-            src={`http://localhost:3001/financialReport/${id}`}
+            src={`https://gilad-form-backend.onrender.com/financialReport/${id}`}
             width="80%"
             height="700"
             title="form review"
@@ -71,7 +71,7 @@ function Review() {
         </div>
         <div className="container">
           <iframe
-            src={`http://localhost:3001/BookKeeping/${id}`}
+            src={`https://gilad-form-backend.onrender.com/BookKeeping/${id}`}
             width="80%"
             height="700"
             title="form review"
