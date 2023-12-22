@@ -26,7 +26,7 @@ function Review() {
 
   return (
     <div>
-      <h2 className="container">אנא בדוק שהפרטים שהזנת נכונים.</h2>
+      <h2 className="container">אנא בדוק שהפרטים שהזנת נכונים</h2>
       <form onSubmit={handleSubmit}>
         <div className="container">
           <iframe
