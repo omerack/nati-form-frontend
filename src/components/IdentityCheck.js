@@ -8,7 +8,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
 
-export default function IdentityCheck({ errors, register }) {
+export default function IdentityCheck({ errors, register, client }) {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
@@ -16,12 +16,18 @@ export default function IdentityCheck({ errors, register }) {
           צרף מסמכים
         </Typography>
         <Typography variant="h7" gutterBottom>
-          נא לצרף רק קבצי pdf, png, jpg
+          צרף צילום ת.ז עם ספח
         </Typography>
-        <Typography variant="h7" gutterBottom>
-          נא לצרף צילום ת.ז עם ספח
-        </Typography>
-        <FileUpload />
+        <FileUpload number={1} />
+        {client === "association" ? (
+          <div style={{margin: "50px 0px 0px 0px"}}>
+            <Typography variant="h7" gutterBottom>
+              צרף צילום חותמת העמותה
+            </Typography>
+              <FileUpload number={2} />
+          </div>
+        ) : null}
+
         <Signature />
         <FormControlLabel
           style={{ padding: "50px 30px 0px 30px" }}

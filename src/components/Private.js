@@ -30,7 +30,7 @@ function Private() {
           id="outlined-basic"
           label="שם פרטי"
           variant="outlined"
-          {...register("name")}
+          {...register("name", { required: "נא למלא את השם הפרטי" })}
         />
         <TextField
           margin="normal"

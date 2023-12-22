@@ -22,7 +22,7 @@ function App() {
         <Route index element={<Form />} />
         <Route path="submit" element={<Submit />} />
         <Route path="login" element={<Login />} />
-        <Route path="review/:id" element={<Review />} />
+        <Route path="review" element={<Review />} />
         <Route element={<PrivateRoutes />}>
           <Route path="admin" element={<Admin />} />
         </Route>

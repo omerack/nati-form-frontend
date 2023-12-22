@@ -17,6 +17,9 @@ import { Alert } from "@mui/material";
 function Form() {
   const methods = useForm({
     defaultValues: {
+      // name: "עומר",
+      // lastName: "אקרמן",
+      id: "204942049",
       phone: "0546229546",
       email: "omeracker1@gmail.com",
       street: "יהודה הלוי",
@@ -31,8 +34,10 @@ function Form() {
   const [loading, setLoading] = useState(false);
   const { listId } = useAuth();
   const [isconfirmed, setIsConfirmed] = useState(false);
+  const [client, setClient] = useState("private");
 
   const onSubmit = async (data) => {
+    const { id, name, lastName, associationName } = data;
     setLoading(true);
     try {
       let BookKeepingFee = null;
@@ -56,14 +61,19 @@ function Form() {
         data.financialReportFee = financialReportFee;
       }
       console.log(data);
-      await axios.post(`https://gilad-form-backend.onrender.com/view`, data, {
+      await axios.post(`http://localhost:3001/view`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-
-      const id = data.id;
-      navigate(`/review/${id}`);
+      
+      navigate(
+        `/review/?id=${id}&name=${encodeURIComponent(
+          name
+        )}&lastName=${encodeURIComponent(
+          lastName
+        )}&associationName=${encodeURIComponent(associationName)}`
+      );
       console.log("success");
     } catch (error) {
       console.error(error);
@@ -88,13 +98,22 @@ function Form() {
             פרטי לקוח חדש
           </Typography>
           <div className="section">
-            <WhichClient register={register} errors={errors} />
+            <WhichClient
+              register={register}
+              errors={errors}
+              client={client}
+              setClient={setClient}
+            />
           </div>
           <div className="section">
             <Contact register={register} errors={errors} />
           </div>
           <div className="input-group">
-            <IdentityCheck errors={errors} register={register} />
+            <IdentityCheck
+              errors={errors}
+              register={register}
+              client={client}
+            />
           </div>
           <Button type="submit" variant="contained" color="primary">
             הבא

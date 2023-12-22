@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { useFormContext } from "react-hook-form";
-import Alert from "@mui/material/Alert";
+import { Alert } from "@mui/material";
 
 const baseStyle = {
   flex: 1,
@@ -32,20 +32,21 @@ const rejectStyle = {
   borderColor: "#ff1744",
 };
 
-export default function FileUpload() {
+export default function FileUpload({ number }) {
   const { setValue, register, formState } = useFormContext();
   const { errors } = formState;
 
-  register("fileUploads", { required: "יש להוסיף את המסמכים הרלוונטים" });
+  register(`fileUploads${number}`, {
+    required: "יש להוסיף את המסמכים הרלוונטים",
+  });
 
   const onDrop = useCallback(
     (acceptedFiles) => {
-      setValue("fileUploads", acceptedFiles);
+      setValue(`fileUploads${number}`, acceptedFiles);
 
-      acceptedFiles.forEach((file, index) => {
-      });
+      acceptedFiles.forEach((file, index) => {});
     },
-    [setValue]
+    [setValue, number]
   );
 
   const {
@@ -71,7 +72,7 @@ export default function FileUpload() {
 
   const removeAll = () => {
     acceptedFiles.length = 0;
-    setValue("fileUploads", []); 
+    setValue(`fileUploads${number}`, []);
     inputRef.current.value = "";
   };
 

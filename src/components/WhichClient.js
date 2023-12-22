@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -7,11 +6,7 @@ import FormLabel from "@mui/material/FormLabel";
 import Private from "./Private";
 import Association from "./Association";
 
-function PersonalInfo() {
-  const [client, setClient] = useState("private");
-
-
-
+function PersonalInfo({ client, setClient }) {
   const handleClientChange = (event) => {
     setClient(event.target.value);
   };
@@ -26,7 +21,11 @@ function PersonalInfo() {
           onChange={handleClientChange}
           name="radio-buttons-group"
         >
-          <FormControlLabel value="private" control={<Radio />} label="פרטי" />
+          <FormControlLabel
+            value="private"
+            control={<Radio />}
+            label="עוסק מורשה/פטור"
+          />
           <FormControlLabel
             value="association"
             control={<Radio />}

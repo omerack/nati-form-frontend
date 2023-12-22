@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "@mui/material";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./Review.css";
 import { useNavigate } from "react-router-dom";
@@ -8,16 +7,26 @@ import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 
 function Review() {
-  const { id } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+
+  let params = new URLSearchParams(window.location.search);
+  let id = params.get("id");
+  let name = params.get("name");
+  let lastName = params.get("lastName");
+  let associationName = params.get("associationName");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      await axios.post(`https://gilad-form-backend.onrender.com/submit/${id}`);
+      await axios.post(`http://localhost:3001/submit/`, {
+        id,
+        name,
+        lastName,
+        associationName,
+      });
       navigate("/submit");
     } catch (error) {
       console.error(error);
@@ -30,7 +39,7 @@ function Review() {
       <form onSubmit={handleSubmit}>
         <div className="container">
           <iframe
-            src={`https://gilad-form-backend.onrender.com/preview/${id}`}
+            src={`http://localhost:3001/preview/${id}`}
             width="80%"
             height="700"
             title="form review"
@@ -38,7 +47,7 @@ function Review() {
         </div>
         <div className="container">
           <iframe
-            src={`https://gilad-form-backend.onrender.com/bituahLeumi/${id}`}
+            src={`http://localhost:3001/bituahLeumi/${id}`}
             width="80%"
             height="700"
             title="form review"
@@ -46,7 +55,7 @@ function Review() {
         </div>
         <div className="container">
           <iframe
-            src={`https://gilad-form-backend.onrender.com/agreement/${id}`}
+            src={`http://localhost:3001/agreement/${id}`}
             width="80%"
             height="700"
             title="form review"
@@ -54,7 +63,7 @@ function Review() {
         </div>
         <div className="container">
           <iframe
-            src={`https://gilad-form-backend.onrender.com/financialReport/${id}`}
+            src={`http://localhost:3001/financialReport/${id}`}
             width="80%"
             height="700"
             title="form review"
@@ -62,7 +71,7 @@ function Review() {
         </div>
         <div className="container">
           <iframe
-            src={`https://gilad-form-backend.onrender.com/BookKeeping/${id}`}
+            src={`http://localhost:3001/BookKeeping/${id}`}
             width="80%"
             height="700"
             title="form review"

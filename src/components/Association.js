@@ -14,9 +14,9 @@ function Association() {
           margin="normal"
           style={{ marginLeft: "10px", width: "350px" }}
           id="outlined-basic"
-          label="שם מספר עמותה"
+          label="שם עמותה"
           variant="outlined"
-          {...register("associationName")}
+          {...register("associationName", { required: "נא למלא שם עמותה" })}
         />
         {errors.associationName && (
           <Alert severity="error">{errors.associationName.message}</Alert>
@@ -41,9 +41,7 @@ function Association() {
             },
           })}
         />
-        {errors.association && (
-          <Alert severity="error">{errors.association.message}</Alert>
-        )}
+        {errors.id && <Alert severity="error">{errors.id.message}</Alert>}
       </div>
     </div>
   );
