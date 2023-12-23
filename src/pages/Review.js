@@ -4,7 +4,6 @@ import "./Review.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
-import { useAuth } from "../utils/AuthContext";
 
 function Review() {
   const navigate = useNavigate();
@@ -27,7 +26,6 @@ function Review() {
         name,
         lastName,
         associationName,
-        giladSignature,
       });
       navigate("/submit");
     } catch (error) {
