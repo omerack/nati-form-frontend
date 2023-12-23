@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from "react";
-import { account, databases, storage } from "../appwriteConfig";
+import { account, databases } from "../appwriteConfig";
 import { ID } from "appwrite";
 
 const AuthContext = createContext();
@@ -11,13 +11,6 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     checkUserStatus();
   }, []);
-
-  const downloadFile = async () => {
-    return storage.getFileDownload(
-      "658615ca9eeba5d0c036",
-      "65862efda6314d864f3f"
-    );
-  };
 
   const loginUser = async (userInfo) => {
     setLoading(true);
@@ -88,7 +81,6 @@ export const AuthProvider = ({ children }) => {
     createId,
     listId,
     deleteId,
-    downloadFile,
   };
 
   return (
