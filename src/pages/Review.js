@@ -7,7 +7,6 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { useAuth } from "../utils/AuthContext";
 
 function Review() {
-  const { downloadFile } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -22,7 +21,6 @@ function Review() {
     setLoading(true);
 
     try {
-      const giladSignature = await downloadFile();
 
       await axios.post(`https://gilad-form-backend.onrender.com/submit/`, {
         id,
