@@ -20,11 +20,16 @@ export default function IdentityCheck({ errors, register, client }) {
         </Typography>
         <FileUpload number={1} />
         {client === "association" ? (
-          <div style={{margin: "50px 0px 0px 0px"}}>
+          <div style={{ margin: "50px 0px 0px 0px" }}>
             <Typography variant="h7" gutterBottom>
               צרף צילום חותמת העמותה
             </Typography>
-              <FileUpload number={2} />
+            <div style={{ color: "red", fontWeight: "bold" }}>
+              <Typography variant="h7" gutterBottom>
+                יש לצלם רק את החותמת ועל רקע לבן בלבד
+              </Typography>
+            </div>
+            <FileUpload number={2} />
           </div>
         ) : null}
 
