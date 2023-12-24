@@ -1,16 +1,30 @@
 import { useAuth } from "../utils/AuthContext";
-import { Button, TextField, Typography, Grid } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Typography,
+  Grid,
+  Alert,
+  Snackbar,
+} from "@mui/material";
 import { useFormContext } from "react-hook-form";
-import "./Admin.css";
-import Alert from "@mui/material/Alert";
+import CopyToClipboard from "react-copy-to-clipboard";
 import Dashboard from "../components/Dashboard";
 import { useState } from "react";
+import "./Admin.css";
 
 function Admin() {
   const { logoutUser, createId } = useAuth();
-  const { register, formState, handleSubmit } = useFormContext();
+  const { register, formState, handleSubmit, reset } = useFormContext();
   const { errors } = formState;
   const [documents, setDocuments] = useState([]);
+  const [open, setOpen] = useState(false);
+
+  const handleCopy = () => {
+    setOpen(true);
+  };
+
+  const link = "https://ackerman-cpa.onrender.com";
 
   const onSubmit = async (data) => {
     try {
@@ -20,11 +34,13 @@ function Admin() {
         data.BookKeepingFee
       );
       console.log(createIdResponse);
+      reset();
       console.log("success");
     } catch (error) {
       console.error(error);
     }
   };
+
   return (
     <div>
       <div className="logout-container">
@@ -33,9 +49,17 @@ function Admin() {
         </Button>
       </div>
       <div>
-        <Button variant="contained" color="primary">
-          קישור ראיית חשבון
-        </Button>
+        <CopyToClipboard text={link} onCopy={handleCopy}>
+          <Button variant="contained" color="primary">
+            קישור ראיית חשבון
+          </Button>
+        </CopyToClipboard>
+        <Snackbar
+          open={open}
+          autoHideDuration={2000}
+          onClose={() => setOpen(false)}
+          message="קישור הועתק"
+        />
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="admin-form-container">
         <div className="input-container">
