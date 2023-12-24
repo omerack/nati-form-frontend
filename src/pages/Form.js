@@ -19,6 +19,7 @@ function Form() {
 
   // {
   //   defaultValues: {
+  //     associationName: "איציק בעמ",
   //     name: "עומר",
   //     lastName: "אקרמן",
   //     id: "204942049",
