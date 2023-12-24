@@ -1,5 +1,5 @@
 import { useAuth } from "../utils/AuthContext";
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography, Grid } from "@mui/material";
 import { useFormContext } from "react-hook-form";
 import "./Admin.css";
 import Alert from "@mui/material/Alert";
@@ -32,9 +32,14 @@ function Admin() {
           LogOut
         </Button>
       </div>
+      <div>
+        <Button variant="contained" color="primary">
+          קישור ראיית חשבון
+        </Button>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)} className="admin-form-container">
         <div className="input-container">
-          <Typography variant="h5">
+          <Typography variant="h6">
             הסכם התקשרות שירותי ביקורת דוחות כספיים
           </Typography>
           <TextField
@@ -45,7 +50,7 @@ function Admin() {
           ></TextField>
         </div>
         <div className="input-container">
-          <Typography variant="h5">הסכם שירות דוח כספי</Typography>
+          <Typography variant="h6">הסכם שירותי ניהול הנהלת חשבונות</Typography>
           <TextField
             sx={{ mb: "10px" }}
             size="small"
@@ -54,7 +59,7 @@ function Admin() {
           />
         </div>
         <div className="input-container">
-          <Typography variant="h5">תעודת זהות</Typography>
+          <Typography variant="h6">תעודת זהות</Typography>
           <TextField
             sx={{ mb: "10px" }}
             size="small"
@@ -81,9 +86,16 @@ function Admin() {
           ></TextField>
           {errors.id && <Alert severity="error">{errors.id.message}</Alert>}
         </div>
-        <Button variant="contained" color="primary" type="submit">
-          צור הרשמה
-        </Button>
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="center"
+          marginTop={2}
+        >
+          <Button variant="contained" color="primary" type="submit">
+            צור הרשמה
+          </Button>
+        </Grid>
       </form>
       <Dashboard documents={documents} setDocuments={setDocuments} />
     </div>

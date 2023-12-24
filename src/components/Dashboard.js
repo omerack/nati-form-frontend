@@ -37,7 +37,7 @@ function Dashboard({ documents, setDocuments }) {
     },
     {
       field: "BookKeepingFee",
-      headerName: "הסכם שירותי דוח כספי",
+      headerName: "הסכם שירותי ניהול הנהלת חשבונות",
       cellClassName: "BookKeepingFee",
       align: "center",
       headerAlign: "center",
