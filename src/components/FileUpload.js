@@ -98,8 +98,8 @@ export default function FileUpload({ number }) {
           <button onClick={removeAll}>Remove All</button>
         </div>
       )}
-      {errors.fileUploads && (
-        <Alert severity="error">{errors.fileUploads.message}</Alert>
+      {errors[`fileUploads${number}`] && (
+        <Alert severity="error">{errors[`fileUploads${number}`].message}</Alert>
       )}
     </div>
   );

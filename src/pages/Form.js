@@ -15,18 +15,20 @@ import { useAuth } from "../utils/AuthContext";
 import { Alert } from "@mui/material";
 
 function Form() {
-  const methods = useForm({
-    defaultValues: {
-      // name: "עומר",
-      // lastName: "אקרמן",
-      id: "204942049",
-      phone: "0546229546",
-      email: "omeracker1@gmail.com",
-      street: "יהודה הלוי",
-      streetNumber: "12",
-      city: "נתניה",
-    },
-  });
+  const methods = useForm();
+
+  // {
+  //   defaultValues: {
+  //     name: "עומר",
+  //     lastName: "אקרמן",
+  //     id: "204942049",
+  //     phone: "0546229546",
+  //     email: "omeracker1@gmail.com",
+  //     street: "יהודה הלוי",
+  //     streetNumber: "12",
+  //     city: "נתניה",
+  //   },
+  // }
 
   const { register, handleSubmit, formState } = methods;
   const { errors } = formState;

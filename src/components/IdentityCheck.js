@@ -36,7 +36,7 @@ export default function IdentityCheck({ errors, register, client }) {
         <Signature />
         <FormControlLabel
           style={{ padding: "50px 30px 0px 30px" }}
-          control={<Checkbox />}
+          control={<Checkbox defaultChecked />}
           label="אני מאשר שכל הפרטים נכונים"
           labelPlacement="start"
           {...register("checkbox", {
