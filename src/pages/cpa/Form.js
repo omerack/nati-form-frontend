@@ -1,17 +1,18 @@
-import "./Form.css";
-import cpaLogo from "../cpaLogo.jpg";
+import "../Form.css";
+import cpaLogo from "../../cpaLogo.jpg";
 import { useState } from "react";
 import Typography from "@mui/material/Typography";
-import IdentityCheck from "../components/IdentityCheck";
-import WhichClient from "../components/WhichClient";
-import Contact from "../components/Contact";
+import IdentityCheck from "../../components/IdentityCheck";
+import WhichClient from "../../components/WhichClient";
+import Contact from "../../components/Contact";
+import Adress from "../../components/Adress";
 // import { DevTool } from "@hookform/devtools";
 import axios from "axios";
 import { Button, Alert } from "@mui/material";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
-import { useAuth } from "../utils/AuthContext";
+import { useAuth } from "../../utils/AuthContext";
 
 function Form() {
   const methods = useForm();
@@ -108,7 +109,8 @@ function Form() {
             />
           </div>
           <div className="section">
-            <Contact register={register} errors={errors} />
+            <Contact />
+            <Adress />
           </div>
           <div className="input-group">
             <IdentityCheck client={client} />
@@ -117,9 +119,7 @@ function Form() {
             הבא
           </Button>
           {isconfirmed && (
-            <Alert severity="error">
-              לא קיבלת אישור אנא פנה למשרד רואי החשבון
-            </Alert>
+            <Alert severity="error">לא קיבלת אישור אנא פנה למשרד</Alert>
           )}
           {loading && <ClipLoader color="#1976d2" />}
         </form>

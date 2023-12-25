@@ -1,7 +1,12 @@
 import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
-function contact({ register, errors }) {
+import { useFormContext } from "react-hook-form";
+
+function Contact() {
+  const { register, formState } = useFormContext();
+  const { errors } = formState;
+
   return (
     <div>
       <div>
@@ -11,7 +16,7 @@ function contact({ register, errors }) {
         <div className="input-group">
           <label>מספר נייד</label>
           <TextField
-            InputProps={{  } }
+            InputProps={{}}
             style={{ width: "350px" }}
             id="outlined-basic"
             label="מספר טלפון"
@@ -51,51 +56,9 @@ function contact({ register, errors }) {
             <Alert severity="error">{errors.email.message}</Alert>
           )}
         </div>
-        <div className="input-group">
-          <label style={{ margin: "25px 0" }}>כתובת מגורים</label>
-          <TextField
-            style={{ width: "300px", marginLeft: "10px", marginBottom: "20px" }}
-            id="outlined-basic"
-            label="רחוב"
-            variant="outlined"
-            {...register("street", {
-              required: "נא למלא את הרחוב",
-            })}
-          />
-          <TextField
-            style={{ width: "100px", marginLeft: "20px" }}
-            id="outlined-basic"
-            label="מספר"
-            variant="outlined"
-            {...register("streetNumber", {
-              required: "נא למלא מספר בית",
-              pattern: {
-                value: /^[0-9]+$/,
-                message: "לא מספר",
-              },
-            })}
-          />
-          <TextField
-            style={{ width: "200px" }}
-            id="outlined-basic"
-            label="עיר"
-            variant="outlined"
-            fullWidth
-            {...register("city", {
-              required: "נא למלא את שם העיר",
-            })}
-          />
-          {errors.street && (
-            <Alert severity="error">{errors.street.message}</Alert>
-          )}
-          {errors.city && <Alert severity="error">{errors.city.message}</Alert>}
-          {errors.streetNumber && (
-            <Alert severity="error">{errors.streetNumber.message}</Alert>
-          )}
-        </div>
       </div>
     </div>
   );
 }
 
-export default contact;
+export default Contact;

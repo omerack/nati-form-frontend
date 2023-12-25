@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import axios from "axios";
-import "./Review.css";
+import "../Review.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";

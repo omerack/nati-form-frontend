@@ -1,6 +1,6 @@
 import React from "react";
-import "./Submit.css";
-import cpaLogo from "../cpaLogo.jpg";
+import "../Submit.css";
+import cpaLogo from "../../cpaLogo.jpg";
 
 function Submit() {
   return (

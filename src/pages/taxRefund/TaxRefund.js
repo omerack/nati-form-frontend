@@ -6,12 +6,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import IdentityCheck from "../../components/IdentityCheck";
 import Private from "../../components/Private";
-import InsuranceLogo from "../../insuranceLogo.jpg";
 import { useAuth } from "../../utils/AuthContext";
 import { FormProvider } from "react-hook-form";
 import Contact from "../../components/Contact";
 
-function Insurance() {
+function TaxRefund() {
   const methods = useForm();
 
   // {
@@ -48,7 +47,7 @@ function Insurance() {
         return;
       }
       await axios.post(
-        `https://gilad-form-backend.onrender.com/insurance/view`,
+        `https://gilad-form-backend.onrender.com/taxRefund/view`,
         data,
         {
           headers: {
@@ -57,7 +56,7 @@ function Insurance() {
         }
       );
       navigate(
-        `/insurance/review/?id=${id}&name=${encodeURIComponent(
+        `/taxRefund/review/?id=${id}&name=${encodeURIComponent(
           name
         )}&lastName=${encodeURIComponent(lastName)}`
       );
@@ -70,9 +69,6 @@ function Insurance() {
 
   return (
     <>
-      <div className="div-img">
-        <img src={InsuranceLogo} alt="form" className="img" />
-      </div>
       <FormProvider {...methods}>
         <form
           className="form-container"
@@ -103,4 +99,4 @@ function Insurance() {
   );
 }
 
-export default Insurance;
+export default TaxRefund;

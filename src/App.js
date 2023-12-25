@@ -1,12 +1,15 @@
-import Form from "./pages/Form";
-import Review from "./pages/Review";
-import Submit from "./pages/Submit";
+import Form from "./pages/cpa/Form";
+import Review from "./pages/cpa/Review";
+import Submit from "./pages/cpa/Submit";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
-import Insurance from "./pages/insurance/Insurance";
 import PrivateRoutes from "./utils/PrivateRoutes";
+import Insurance from "./pages/insurance/Insurance";
 import InsuranceReview from "./pages/insurance/InsuranceReview";
 import InsuranceSubmit from "./pages/insurance/InsuranceSubmit";
+import TaxRefund from "./pages/taxRefund/TaxRefund";
+import TaxRefundReview from "./pages/taxRefund/TaxRefundReview";
+import TaxRefundSubmit from "./pages/taxRefund/TaxRefundSubmit";
 import { AuthProvider } from "./utils/AuthContext";
 import { useForm, FormProvider } from "react-hook-form";
 import {
@@ -29,6 +32,9 @@ function App() {
         <Route path="insurance" element={<Insurance />} />
         <Route path="insurance/review" element={<InsuranceReview />} />
         <Route path="insurance/submit" element={<InsuranceSubmit />} />
+        <Route path="taxRefund" element={<TaxRefund />} />
+        <Route path="taxRefund/review" element={<TaxRefundReview />} />
+        <Route path="taxRefund/submit" element={<TaxRefundSubmit />} />
         <Route element={<PrivateRoutes />}>
           <Route path="admin" element={<Admin />} />
         </Route>
