@@ -16,7 +16,8 @@ function InsuranceReview() {
     setLoading(true);
 
     try {
-      await axios.post(`http://localhost:3001/insurance/submit/${id}`);
+      await axios.post(`https://gilad-form-backend.onrender.com
+/insurance/submit/${id}`);
       navigate("/submit");
     } catch (error) {
       console.error(error);
@@ -29,7 +30,8 @@ function InsuranceReview() {
       <form onSubmit={handleSubmit}>
         <div className="container">
           <iframe
-            src={`http://localhost:3001/insurance/preview/${id}`}
+            src={`https://gilad-form-backend.onrender.com
+/insurance/preview/${id}`}
             width="80%"
             height="700"
             title="form review"
