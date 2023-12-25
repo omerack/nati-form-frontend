@@ -19,7 +19,6 @@ function InsuranceReview() {
     setLoading(true);
 
     try {
-      console.log(id);
       await axios.post(
         `https://gilad-form-backend.onrender.com/insurance/submit`,
         {
