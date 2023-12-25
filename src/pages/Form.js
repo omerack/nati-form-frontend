@@ -64,16 +64,11 @@ function Form() {
       }
       console.log(data);
 
-      await axios.post(
-        `https://gilad-form-backend.onrender.com
-/view`,
-        data,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.post(`https://gilad-form-backend.onrender.com/view`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       navigate(
         `/review/?id=${id}&name=${encodeURIComponent(
           name

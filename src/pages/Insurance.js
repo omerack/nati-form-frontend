@@ -43,8 +43,7 @@ function Insurance() {
         return;
       }
       await axios.post(
-        `https://gilad-form-backend.onrender.com
-/insurance/view`,
+        `https://gilad-form-backend.onrender.com/insurance/view`,
         data,
         {
           headers: {
