@@ -1,25 +1,34 @@
 import { Button } from "@mui/material";
-import { useParams } from "react-router-dom";
 import axios from "axios";
-import "./Review.css";
+import "../Review.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 
 function InsuranceReview() {
-  const { id } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+
+  let params = new URLSearchParams(window.location.search);
+  let id = params.get("id");
+  let name = params.get("name");
+  let lastName = params.get("lastName");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
+      console.log(id);
       await axios.post(
-        `https://gilad-form-backend.onrender.com/insurance/submit/${id}`
+        `https://gilad-form-backend.onrender.com/insurance/submit`,
+        {
+          id,
+          name,
+          lastName,
+        }
       );
-      navigate("/submit");
+      navigate("/insurance/submit");
     } catch (error) {
       console.error(error);
     }

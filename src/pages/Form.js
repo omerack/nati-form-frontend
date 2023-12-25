@@ -16,7 +16,6 @@ import { useAuth } from "../utils/AuthContext";
 function Form() {
   const methods = useForm();
 
-
   // {
   //   defaultValues: {
   //     associationName: "איציק בעמ",
@@ -30,7 +29,7 @@ function Form() {
   //     city: "נתניה",
   //   },
   // }
-  
+
   const { register, handleSubmit, formState } = methods;
   const { errors } = formState;
   const navigate = useNavigate();

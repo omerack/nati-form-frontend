@@ -4,20 +4,23 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import IdentityCheck from "../components/IdentityCheck";
-import Private from "../components/Private";
-import InsuranceLogo from "../insuranceLogo.jpg";
-import { useAuth } from "../utils/AuthContext";
+import IdentityCheck from "../../components/IdentityCheck";
+import Private from "../../components/Private";
+import InsuranceLogo from "../../insuranceLogo.jpg";
+import { useAuth } from "../../utils/AuthContext";
 import { FormProvider } from "react-hook-form";
 
 function Insurance() {
-  const methods = useForm({
-    defaultValues: {
-      name: "עומר",
-      lastName: "אקרמן",
-      id: "204942049",
-    },
-  });
+  const methods = useForm();
+
+  // {
+  //   defaultValues: {
+  //     name: "עומר",
+  //     lastName: "אקרמן",
+  //     id: "204942049",
+  //   },
+  // }
+
   const { handleSubmit } = methods;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -27,7 +30,6 @@ function Insurance() {
   const onSubmit = async (data) => {
     const { id, name, lastName } = data;
 
-    console.log(data);
     setLoading(true);
     try {
       const listIdResponse = await listId(data);

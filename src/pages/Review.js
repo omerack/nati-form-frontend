@@ -20,7 +20,7 @@ function Review() {
     setLoading(true);
 
     try {
-      await axios.post(`https://gilad-form-backend.onrender.com/submit/`, {
+      await axios.post(`https://gilad-form-backend.onrender.com/submit`, {
         id,
         name,
         lastName,
