@@ -7,8 +7,11 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
+import { useFormContext } from "react-hook-form";
 
-export default function IdentityCheck({ errors, register, client }) {
+export default function IdentityCheck({ client }) {
+  const { register, formState } = useFormContext();
+  const { errors } = formState;
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>

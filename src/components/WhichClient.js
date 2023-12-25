@@ -5,6 +5,7 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Private from "./Private";
 import Association from "./Association";
+import FamilyState from "./FamilyState";
 
 function PersonalInfo({ client, setClient }) {
   const handleClientChange = (event) => {
@@ -33,7 +34,14 @@ function PersonalInfo({ client, setClient }) {
           />
         </RadioGroup>
       </FormControl>
-      {client === "private" ? <Private /> : <Association />}
+      {client === "private" ? (
+        <div>
+          <Private />
+          <FamilyState />
+        </div>
+      ) : (
+        <Association />
+      )}
     </div>
   );
 }

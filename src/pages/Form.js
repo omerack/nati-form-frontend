@@ -1,5 +1,5 @@
 import "./Form.css";
-import logo from "../logo.jpg";
+import cpaLogo from "../cpaLogo.jpg";
 import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import IdentityCheck from "../components/IdentityCheck";
@@ -7,27 +7,28 @@ import WhichClient from "../components/WhichClient";
 import Contact from "../components/Contact";
 // import { DevTool } from "@hookform/devtools";
 import axios from "axios";
-import { Button } from "@mui/material";
+import { Button, Alert } from "@mui/material";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useAuth } from "../utils/AuthContext";
-import { Alert } from "@mui/material";
 
 function Form() {
-  const methods = useForm({
-    defaultValues: {
-      // associationName: "איציק בעמ",
-      name: "עומר",
-      lastName: "אקרמן",
-      id: "204942049",
-      phone: "0546229546",
-      email: "omeracker1@gmail.com",
-      street: "יהודה הלוי",
-      streetNumber: "12",
-      city: "נתניה",
-    },
-  });
+  const methods = useForm();
+
+  // {
+  //   defaultValues: {
+  //     associationName: "איציק בעמ",
+  //     name: "עומר",
+  //     lastName: "אקרמן",
+  //     id: "204942049",
+  //     phone: "0546229546",
+  //     email: "omeracker1@gmail.com",
+  //     street: "יהודה הלוי",
+  //     streetNumber: "12",
+  //     city: "נתניה",
+  //   },
+  // }
 
   const { register, handleSubmit, formState } = methods;
   const { errors } = formState;
@@ -63,7 +64,7 @@ function Form() {
       }
       console.log(data);
 
-      await axios.post(`https://gilad-form-backend.onrender.com/view`, data, {
+      await axios.post(`http://localhost:3001/view`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -86,7 +87,7 @@ function Form() {
   return (
     <>
       <div className="div-img">
-        <img src={logo} alt="form" className="img" />
+        <img src={cpaLogo} alt="form" className="img" />
       </div>
       <FormProvider {...methods}>
         <form
@@ -110,11 +111,7 @@ function Form() {
             <Contact register={register} errors={errors} />
           </div>
           <div className="input-group">
-            <IdentityCheck
-              errors={errors}
-              register={register}
-              client={client}
-            />
+            <IdentityCheck client={client} />
           </div>
           <Button type="submit" variant="contained" color="primary">
             הבא
