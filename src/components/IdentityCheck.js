@@ -18,9 +18,14 @@ export default function IdentityCheck({ client }) {
         <Typography variant="h6" gutterBottom>
           צרף מסמכים
         </Typography>
+        {client === 'private' ?
         <Typography variant="h7" gutterBottom>
           צרף צילום ת.ז עם ספח
         </Typography>
+        :
+        <Typography variant="h7" gutterBottom>
+          צרף תעודת רישום עמותה
+        </Typography>}
         <FileUpload number={1} />
         {client === "association" ? (
           <div style={{ margin: "50px 0px 0px 0px" }}>
@@ -35,7 +40,6 @@ export default function IdentityCheck({ client }) {
             <FileUpload number={2} />
           </div>
         ) : null}
-
         <Signature />
         <FormControlLabel
           style={{ padding: "50px 30px 0px 30px" }}

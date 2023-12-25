@@ -12,7 +12,8 @@ function Admin() {
   const { errors } = formState;
   const [documents, setDocuments] = useState([]);
 
-  const link = "https://ackerman-cpa.onrender.com";
+  const cpaLink = "https://ackerman-cpa.onrender.com";
+  const insuranceLink = "https://ackerman-cpa.onrender.com/insurance";
 
   const onSubmit = async (data) => {
     try {
@@ -36,10 +37,17 @@ function Admin() {
           LogOut
         </Button>
       </div>
-      <div>
-        <CopyToClipboard text={link}>
+      <div style={{ marginBottom: "20px" }}>
+        <CopyToClipboard text={cpaLink}>
           <Button variant="contained" color="primary">
             קישור ראיית חשבון
+          </Button>
+        </CopyToClipboard>
+      </div>
+      <div>
+        <CopyToClipboard text={insuranceLink}>
+          <Button variant="contained" color="primary">
+            קישור ביטוח
           </Button>
         </CopyToClipboard>
       </div>
