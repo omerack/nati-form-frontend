@@ -14,6 +14,7 @@ function Admin() {
 
   const cpaLink = "https://ackerman-cpa.onrender.com";
   const insuranceLink = "https://ackerman-cpa.onrender.com/insurance";
+  const taxRefundLink = "https://ackerman-cpa.onrender.com/taxRefund";
 
   const onSubmit = async (data) => {
     try {
@@ -48,6 +49,13 @@ function Admin() {
         <CopyToClipboard text={insuranceLink}>
           <Button variant="contained" color="primary">
             קישור ביטוח
+          </Button>
+        </CopyToClipboard>
+      </div>
+      <div>
+        <CopyToClipboard text={taxRefundLink}>
+          <Button variant="contained" color="primary">
+            קישור החזר מס
           </Button>
         </CopyToClipboard>
       </div>
