@@ -44,15 +44,11 @@ function Insurance() {
         setIsConfirmed(true);
         return;
       }
-      await axios.post(
-        `https://gilad-form-backend.onrender.com/insurance/view`,
-        data,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.post(`http://localhost:3001/insurance/view`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       navigate(
         `/insurance/review/?id=${id}&name=${encodeURIComponent(
           name
