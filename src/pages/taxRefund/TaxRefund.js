@@ -26,17 +26,24 @@ function TaxRefund() {
   const { handleSubmit } = methods;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const { listId } = useAuth();
+  const { taxRefundListId } = useAuth();
   const [isconfirmed, setIsConfirmed] = useState(false);
+
+  const showAlert = () => {
+    setTimeout(() => setIsConfirmed(false), 3000);
+  };
 
   const onSubmit = async (data) => {
     const { id, name, lastName } = data;
     console.log(data);
     setLoading(true);
     try {
-      const listIdResponse = await listId(data);
+      let company = null;
+
+      const listIdResponse = await taxRefundListId(data);
       const found = listIdResponse.documents.some((document) => {
         if (document.id === data.id) {
+          company = document.company;
           return true;
         }
         return false;
@@ -45,16 +52,14 @@ function TaxRefund() {
       if (!found) {
         setIsConfirmed(true);
         return;
+      } else {
+        data.company = company;
       }
-      await axios.post(
-        `https://gilad-form-backend.onrender.com/taxRefund/view`,
-        data,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.post(`http://localhost:3001/taxRefund/view`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       navigate(
         `/taxRefund/review/?id=${id}&name=${encodeURIComponent(
           name
@@ -86,7 +91,12 @@ function TaxRefund() {
           <div className="input-group">
             <IdentityCheck />
           </div>
-          <Button type="submit" variant="contained" color="primary">
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            onClick={showAlert}
+          >
             הבא
           </Button>
           {isconfirmed && (

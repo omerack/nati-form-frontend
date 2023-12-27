@@ -35,9 +35,13 @@ function Form() {
   const { errors } = formState;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const { listId } = useAuth();
+  const { cpaListId } = useAuth();
   const [isconfirmed, setIsConfirmed] = useState(false);
   const [client, setClient] = useState("private");
+
+  const showAlert = () => {
+    setTimeout(() => setIsConfirmed(false), 3000);
+  };
 
   const onSubmit = async (data) => {
     const { id, name, lastName, associationName } = data;
@@ -46,7 +50,7 @@ function Form() {
       let BookKeepingFee = null;
       let financialReportFee = null;
 
-      const listIdResponse = await listId(data);
+      const listIdResponse = await cpaListId(data);
       const found = listIdResponse.documents.some((document) => {
         if (document.id === data.id) {
           BookKeepingFee = document.BookKeepingFee;
@@ -65,7 +69,7 @@ function Form() {
       }
       console.log(data);
 
-      await axios.post(`https://gilad-form-backend.onrender.com/view`, data, {
+      await axios.post(`http://localhost:3001/view`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -115,7 +119,12 @@ function Form() {
           <div className="input-group">
             <IdentityCheck client={client} />
           </div>
-          <Button type="submit" variant="contained" color="primary">
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            onClick={showAlert}
+          >
             הבא
           </Button>
           {isconfirmed && (

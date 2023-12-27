@@ -27,17 +27,24 @@ function Insurance() {
   const { handleSubmit } = methods;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const { listId } = useAuth();
+  const { insuranceListId } = useAuth();
   const [isconfirmed, setIsConfirmed] = useState(false);
+
+  const showAlert = () => {
+    setTimeout(() => setIsConfirmed(false), 3000);
+  };
 
   const onSubmit = async (data) => {
     const { id, name, lastName } = data;
     console.log(data);
     setLoading(true);
     try {
-      const listIdResponse = await listId(data);
+      let insuranceFee = null;
+
+      const listIdResponse = await insuranceListId(data);
       const found = listIdResponse.documents.some((document) => {
         if (document.id === data.id) {
+          insuranceFee = document.insuranceFee;
           return true;
         }
         return false;
@@ -46,16 +53,14 @@ function Insurance() {
       if (!found) {
         setIsConfirmed(true);
         return;
+      } else {
+        data.insuranceFee = insuranceFee;
       }
-      await axios.post(
-        `https://gilad-form-backend.onrender.com/insurance/view`,
-        data,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.post(`http://localhost:3001/insurance/view`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       navigate(
         `/insurance/review/?id=${id}&name=${encodeURIComponent(
           name
@@ -90,7 +95,12 @@ function Insurance() {
           <div className="input-group">
             <IdentityCheck />
           </div>
-          <Button type="submit" variant="contained" color="primary">
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            onClick={showAlert}
+          >
             הבא
           </Button>
           {isconfirmed && (

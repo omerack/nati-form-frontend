@@ -1,31 +1,34 @@
-import { useAuth } from "../utils/AuthContext";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect } from "react";
+import { useAuth } from "../utils/AuthContext";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
 
-function Dashboard({ documents, setDocuments }) {
-  const { listId, deleteId } = useAuth();
+function TableCpa({ cpaDocuments, setCpaDocuments }) {
+  const { cpaListId, cpaDeleteId } = useAuth();
 
   useEffect(() => {
     const fetchData = async (data) => {
-      const createIdResponse = await listId(data);
-      setDocuments(createIdResponse.documents);
+      const createIdResponse = await cpaListId(data);
+      setCpaDocuments(createIdResponse.documents);
     };
     fetchData().catch(console.error);
-  }, [listId, setDocuments]);
+  }, [cpaListId, setCpaDocuments]);
 
-  const deleteRow = async (id) => {
+  const deleteCpaRow = async (id) => {
     try {
-      await deleteId(id);
-      const createIdResponse = await listId();
-      setDocuments(createIdResponse.documents);
+      await cpaDeleteId(id);
+      const createIdResponse = await cpaListId();
+      setCpaDocuments(createIdResponse.documents);
       console.log("Deleted");
     } catch (error) {
       console.error(error);
     }
   };
 
-  const columns = [
+  const cpaColumns = [
     { field: "id", headerName: "תעודת זהות", width: 100 },
     {
       field: "financialReportFee",
@@ -50,14 +53,11 @@ function Dashboard({ documents, setDocuments }) {
       headerAlign: "center",
       renderCell: (params) => {
         return (
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            onClick={() => deleteRow(params.row.$id)}
-          >
-            Delete
-          </Button>
+          <Tooltip title="Delete">
+            <IconButton onClick={() => deleteCpaRow(params.row.$id)}>
+              <DeleteIcon variant="contained" color="primary" size="small" />
+            </IconButton>
+          </Tooltip>
         );
       },
     },
@@ -66,8 +66,8 @@ function Dashboard({ documents, setDocuments }) {
   return (
     <Box sx={{ width: { sm: "100%", md: "50%" }, margin: "auto" }}>
       <DataGrid
-        rows={documents}
-        columns={columns}
+        rows={cpaDocuments}
+        columns={cpaColumns}
         disableRowSelectionOnClick
         disablecolumSelectionOnClick
         disableColumnFilter
@@ -76,4 +76,4 @@ function Dashboard({ documents, setDocuments }) {
   );
 }
 
-export default Dashboard;
+export default TableCpa;

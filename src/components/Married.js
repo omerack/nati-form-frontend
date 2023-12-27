@@ -50,7 +50,7 @@ function Married({ register, errors }) {
                 );
               },
             },
-          })}
+        })}
         />
         {errors.partnerId && (
           <Alert severity="error">{errors.partnerId.message}</Alert>

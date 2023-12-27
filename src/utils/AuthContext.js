@@ -46,10 +46,10 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   };
 
-  const createId = async (id, financialReportFee, BookKeepingFee) => {
+  const cpaCreateId = async (id, financialReportFee, BookKeepingFee) => {
     return databases.createDocument(
       "65832e96a4e2a2f48a0a",
-      "65832eab230e1296cd09",
+      "658c6769dc96bb34bd9a",
       ID.unique(),
       {
         id: id,
@@ -59,17 +59,71 @@ export const AuthProvider = ({ children }) => {
     );
   };
 
-  const listId = async (id) => {
+  const cpaListId = async (id) => {
     return databases.listDocuments(
       "65832e96a4e2a2f48a0a",
-      "65832eab230e1296cd09"
+      "658c6769dc96bb34bd9a"
     );
   };
 
-  const deleteId = async (id) => {
+  const cpaDeleteId = async (id) => {
     return databases.deleteDocument(
       "65832e96a4e2a2f48a0a",
-      "65832eab230e1296cd09",
+      "658c6769dc96bb34bd9a",
+      id
+    );
+  };
+
+  const insuranceCreateId = async (id, insuranceFee) => {
+    return databases.createDocument(
+      "65832e96a4e2a2f48a0a",
+      "658a0e84ef5feb69b880",
+      ID.unique(),
+      {
+        id: id,
+        insuranceFee: insuranceFee,
+      }
+    );
+  };
+
+  const insuranceListId = async (id) => {
+    return databases.listDocuments(
+      "65832e96a4e2a2f48a0a",
+      "658a0e84ef5feb69b880"
+    );
+  };
+
+  const insuranceDeleteId = async (id) => {
+    return databases.deleteDocument(
+      "65832e96a4e2a2f48a0a",
+      "658a0e84ef5feb69b880",
+      id
+    );
+  };
+
+  const taxRefundCreateId = async (id, company) => {
+    return databases.createDocument(
+      "65832e96a4e2a2f48a0a",
+      "658ae35cb5299a8f94e0",
+      ID.unique(),
+      {
+        id: id,
+        company: company,
+      }
+    );
+  };
+
+  const taxRefundListId = async (id) => {
+    return databases.listDocuments(
+      "65832e96a4e2a2f48a0a",
+      "658ae35cb5299a8f94e0"
+    );
+  };
+
+  const taxRefundDeleteId = async (id) => {
+    return databases.deleteDocument(
+      "65832e96a4e2a2f48a0a",
+      "658ae35cb5299a8f94e0",
       id
     );
   };
@@ -78,9 +132,15 @@ export const AuthProvider = ({ children }) => {
     user,
     loginUser,
     logoutUser,
-    createId,
-    listId,
-    deleteId,
+    cpaCreateId,
+    cpaListId,
+    cpaDeleteId,
+    insuranceCreateId,
+    insuranceListId,
+    insuranceDeleteId,
+    taxRefundCreateId,
+    taxRefundListId,
+    taxRefundDeleteId,
   };
 
   return (

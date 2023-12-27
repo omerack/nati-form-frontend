@@ -1,29 +1,51 @@
 import { useAuth } from "../utils/AuthContext";
-import { Button, TextField, Typography, Grid, Alert } from "@mui/material";
+import { Button } from "@mui/material";
 import { useFormContext } from "react-hook-form";
-import CopyToClipboard from "react-copy-to-clipboard";
-import Dashboard from "../components/Dashboard";
 import { useState } from "react";
+import PricingCpa from "../components/PricingCpa";
+import PricingInsurance from "../components/PricingInsurance";
+import PricingTaxRefund from "../components/PricingTaxRefund";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
+import VolunteerActivismOutlinedIcon from "@mui/icons-material/VolunteerActivismOutlined";
+import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
+import TableCpa from "../components/TableCpa";
+import TableInsurance from "../components/TableInsurance";
+import TableTaxRefund from "../components/TableTaxRefund";
 import "./Admin.css";
 
 function Admin() {
-  const { logoutUser, createId } = useAuth();
-  const { register, formState, handleSubmit, reset } = useFormContext();
-  const { errors } = formState;
-  const [documents, setDocuments] = useState([]);
+  const { logoutUser, cpaCreateId, insuranceCreateId, taxRefundCreateId } =
+    useAuth();
+  const { handleSubmit, reset } = useFormContext();
+  const [cpaDocuments, setCpaDocuments] = useState([]);
+  const [insuranceDocuments, setInsuranceDocuments] = useState([]);
+  const [taxRefundDocuments, setTaxRefundDocuments] = useState([]);
+  const [pricing, setPricing] = useState(0);
 
-  const cpaLink = "https://ackerman-cpa.onrender.com";
-  const insuranceLink = "https://ackerman-cpa.onrender.com/insurance";
-  const taxRefundLink = "https://ackerman-cpa.onrender.com/taxRefund";
 
   const onSubmit = async (data) => {
     try {
-      const createIdResponse = await createId(
-        data.id,
-        data.financialReportFee,
-        data.BookKeepingFee
-      );
-      console.log(createIdResponse);
+      console.log(data);
+      if (data.financialReportFee) {
+        const createIdResponse = await cpaCreateId(
+          data.id,
+          data.financialReportFee,
+          data.BookKeepingFee
+        );
+        console.log(createIdResponse);
+        console.log(cpaDocuments);
+      } else if (data.insuranceFee) {
+        const createIdResponse = await insuranceCreateId(
+          data.id,
+          data.insuranceFee
+        );
+        console.log(createIdResponse);
+      } else {
+        const createIdResponse = await taxRefundCreateId(data.id, data.company);
+        console.log(createIdResponse);
+      }
       reset();
       console.log("success");
     } catch (error) {
@@ -38,88 +60,62 @@ function Admin() {
           LogOut
         </Button>
       </div>
-      <div style={{ marginBottom: "20px" }}>
-        <CopyToClipboard text={cpaLink}>
-          <Button variant="contained" color="primary">
-            קישור ראיית חשבון
-          </Button>
-        </CopyToClipboard>
-      </div>
-      <div>
-        <CopyToClipboard text={insuranceLink}>
-          <Button variant="contained" color="primary">
-            קישור ביטוח
-          </Button>
-        </CopyToClipboard>
-      </div>
-      <div>
-        <CopyToClipboard text={taxRefundLink}>
-          <Button variant="contained" color="primary">
-            קישור החזר מס
-          </Button>
-        </CopyToClipboard>
-      </div>
+
+
+
+      <BottomNavigation
+        showLabels
+        value={pricing}
+        onChange={(event, newValue) => {
+          setPricing(newValue);
+        }}
+        sx={{
+          // bgcolor: "#e5e5e5",
+          borderRadius: 2,
+          borderColor: "#212529",
+          border: 1,
+          m: "auto",
+          width: "52.5%",
+        }}
+      >
+        <BottomNavigationAction
+          label="ראיית חשבון"
+          icon={<MenuBookOutlinedIcon />}
+        />
+        <BottomNavigationAction
+          label="ביטוח"
+          icon={<VolunteerActivismOutlinedIcon />}
+        />
+        <BottomNavigationAction
+          label="החזר מס"
+          icon={<CurrencyExchangeIcon />}
+        />
+      </BottomNavigation>
       <form onSubmit={handleSubmit(onSubmit)} className="admin-form-container">
-        <div className="input-container">
-          <Typography variant="h6">
-            הסכם התקשרות שירותי ביקורת דוחות כספיים
-          </Typography>
-          <TextField
-            sx={{ mb: "10px" }}
-            size="small"
-            label="הכנס סכום לשינוי"
-            {...register("financialReportFee")}
-          ></TextField>
-        </div>
-        <div className="input-container">
-          <Typography variant="h6">הסכם שירותי ניהול הנהלת חשבונות</Typography>
-          <TextField
-            sx={{ mb: "10px" }}
-            size="small"
-            label="הכנס סכום לשינוי"
-            {...register("BookKeepingFee")}
-          />
-        </div>
-        <div className="input-container">
-          <Typography variant="h6">תעודת זהות</Typography>
-          <TextField
-            sx={{ mb: "10px" }}
-            size="small"
-            label="הכנס תעודת זהות"
-            {...register("id", {
-              required: "נא למלא את תעודת הזהות",
-              validate: {
-                length: (fieldValue) => {
-                  return (
-                    fieldValue.length === 9 || "תעודת הזהות חייבת להיות 9 ספרות"
-                  );
-                },
-                isRegistered: (fieldValue) => {
-                  const isRegistered = documents.some((document) => {
-                    if (document.id === fieldValue) {
-                      return true;
-                    }
-                    return false;
-                  });
-                  return !isRegistered || "תעודת הזהות קיימת במערכת";
-                },
-              },
-            })}
-          ></TextField>
-          {errors.id && <Alert severity="error">{errors.id.message}</Alert>}
-        </div>
-        <Grid
-          container
-          justifyContent="center"
-          alignItems="center"
-          marginTop={2}
-        >
-          <Button variant="contained" color="primary" type="submit">
-            צור הרשמה
-          </Button>
-        </Grid>
+        {pricing === 0 ? (
+          <PricingCpa cpaDocuments={cpaDocuments} />
+        ) : pricing === 1 ? (
+          <PricingInsurance insuranceDocuments={insuranceDocuments} />
+        ) : (
+          <PricingTaxRefund taxRefundDocuments={taxRefundDocuments} />
+        )}
       </form>
-      <Dashboard documents={documents} setDocuments={setDocuments} />
+      {pricing === 0 ? (
+        <TableCpa
+          cpaDocuments={cpaDocuments}
+          setCpaDocuments={setCpaDocuments}
+        />
+      ) : pricing === 1 ? (
+        <TableInsurance
+          insuranceDocuments={insuranceDocuments}
+          setInsuranceDocuments={setInsuranceDocuments}
+        />
+      ) : (
+        <TableTaxRefund
+          taxRefundDocuments={taxRefundDocuments}
+          setTaxRefundDocuments={setTaxRefundDocuments}
+        />
+      )}
     </div>
   );
 }
