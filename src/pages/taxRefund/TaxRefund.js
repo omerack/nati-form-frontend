@@ -55,11 +55,15 @@ function TaxRefund() {
       } else {
         data.company = company;
       }
-      await axios.post(`http://localhost:3001/taxRefund/view`, data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axios.post(
+        `https://gilad-form-backend.onrender.com/taxRefund/view`,
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       navigate(
         `/taxRefund/review/?id=${id}&name=${encodeURIComponent(
           name
