@@ -18,13 +18,13 @@ export default function IdentityCheck({ client }) {
         <Typography variant="h6" gutterBottom>
           צרף מסמכים
         </Typography>
-        {client === "private" ? (
+        {client === "association" ? (
           <Typography variant="h7" gutterBottom>
-            צרף צילום ת.ז עם ספח
+            צרף תעודת רישום עמותה
           </Typography>
         ) : (
           <Typography variant="h7" gutterBottom>
-            צרף תעודת רישום עמותה
+            צרף צילום ת.ז עם ספח
           </Typography>
         )}
         <FileUpload number={1} />
