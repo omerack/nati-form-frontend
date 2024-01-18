@@ -60,9 +60,6 @@ function Admin() {
           LogOut
         </Button>
       </div>
-
-
-
       <BottomNavigation
         showLabels
         value={pricing}
