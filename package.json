@@ -8,7 +8,10 @@
     "@mui/material": "^5.14.11",
     "@mui/x-data-grid": "^6.18.5",
     "@mui/x-date-pickers": "^6.16.0",
+<<<<<<< HEAD
     "@reduxjs/toolkit": "^2.0.1",
+=======
+>>>>>>> 245b37433d9a9e76dcfd689d17e397055f4517f1
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -25,13 +28,19 @@
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.47.0",
     "react-jss": "^10.10.0",
+<<<<<<< HEAD
     "react-redux": "^9.1.0",
+=======
+>>>>>>> 245b37433d9a9e76dcfd689d17e397055f4517f1
     "react-router-dom": "^6.18.0",
     "react-scripts": "5.0.1",
     "react-signature-canvas": "^1.0.6",
     "react-spinners": "^0.13.8",
+<<<<<<< HEAD
     "react-table": "^7.8.0",
     "redux": "^5.0.1",
+=======
+>>>>>>> 245b37433d9a9e76dcfd689d17e397055f4517f1
     "web-vitals": "^2.1.4"
   },
   "scripts": {
