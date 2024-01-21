@@ -1,0 +1,38 @@
+.clients-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  max-width: 800px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f8f8f8;
+}
+
+.client-container {
+  border: 2px solid #1a90ff;
+  border-radius: 8px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.client-container:hover {
+  cursor: pointer;
+}
+
+.client-container {
+  position: relative;
+}
+
+.more-vert-icon {
+  position: absolute;
+  left: 1%;
+  top: 5%;
+}
+.more-vert-icon:hover {
+  cursor: pointer;
+  color: #1976d2;
+  background-color: #edeff2;
+}

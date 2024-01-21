@@ -14,6 +14,7 @@ import TableCpa from "../components/TableCpa";
 import TableInsurance from "../components/TableInsurance";
 import TableTaxRefund from "../components/TableTaxRefund";
 import "./Admin.css";
+import { useNavigate } from "react-router-dom";
 
 function Admin() {
   const { logoutUser, cpaCreateId, insuranceCreateId, taxRefundCreateId } =
@@ -23,7 +24,7 @@ function Admin() {
   const [insuranceDocuments, setInsuranceDocuments] = useState([]);
   const [taxRefundDocuments, setTaxRefundDocuments] = useState([]);
   const [pricing, setPricing] = useState(0);
-
+  const Navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
@@ -53,11 +54,18 @@ function Admin() {
     }
   };
 
+  const clientManagement = () => {
+    Navigate("/clients");
+  };
+
   return (
     <div>
       <div className="logout-container">
         <Button onClick={logoutUser} variant="contained" color="primary">
-          LogOut
+          התנתק
+        </Button>
+        <Button onClick={clientManagement} variant="contained" color="primary">
+          לקוחות
         </Button>
       </div>
       <BottomNavigation

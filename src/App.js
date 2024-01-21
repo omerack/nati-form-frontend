@@ -10,6 +10,7 @@ import InsuranceSubmit from "./pages/insurance/InsuranceSubmit";
 import TaxRefund from "./pages/taxRefund/TaxRefund";
 import TaxRefundReview from "./pages/taxRefund/TaxRefundReview";
 import TaxRefundSubmit from "./pages/taxRefund/TaxRefundSubmit";
+import ClientsPage from "./pages/ClientsPage";
 import { AuthProvider } from "./utils/AuthContext";
 import { useForm, FormProvider } from "react-hook-form";
 import {
@@ -37,6 +38,7 @@ function App() {
         <Route path="taxRefund/submit" element={<TaxRefundSubmit />} />
         <Route element={<PrivateRoutes />}>
           <Route path="admin" element={<Admin />} />
+          <Route path="clients" element={<ClientsPage />} />
         </Route>
       </Route>
     )

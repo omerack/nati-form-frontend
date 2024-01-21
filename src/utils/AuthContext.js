@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }) => {
     );
   };
 
-  const cpaListId = async (id) => {
+  const cpaListId = async () => {
     return databases.listDocuments(
       "65832e96a4e2a2f48a0a",
       "658c6769dc96bb34bd9a"
@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }) => {
     );
   };
 
-  const insuranceListId = async (id) => {
+  const insuranceListId = async () => {
     return databases.listDocuments(
       "65832e96a4e2a2f48a0a",
       "658a0e84ef5feb69b880"
@@ -113,7 +113,7 @@ export const AuthProvider = ({ children }) => {
     );
   };
 
-  const taxRefundListId = async (id) => {
+  const taxRefundListId = async () => {
     return databases.listDocuments(
       "65832e96a4e2a2f48a0a",
       "658ae35cb5299a8f94e0"
@@ -125,6 +125,51 @@ export const AuthProvider = ({ children }) => {
       "65832e96a4e2a2f48a0a",
       "658ae35cb5299a8f94e0",
       id
+    );
+  };
+
+  const createClient = async (name, phone, demandProducts, notesGilad) => {
+    return databases.createDocument(
+      "65832e96a4e2a2f48a0a",
+      "65a9665c7ed715dadf97",
+      ID.unique(),
+      {
+        name: name,
+        phone: phone,
+        demandProducts: demandProducts,
+        status: "בהמתנה",
+        notesGilad: notesGilad,
+      }
+    );
+  };
+//   מעוניין שיתקשרו אליו בין השעות 14:00-15:30.
+// המלצתי לו להשקיע בקופת גמל להשקעה
+
+  const listClient = async () => {
+    return databases.listDocuments(
+      "65832e96a4e2a2f48a0a",
+      "65a9665c7ed715dadf97"
+    );
+  };
+
+  const deleteClient = async (id) => {
+    return databases.deleteDocument(
+      "65832e96a4e2a2f48a0a",
+      "65a9665c7ed715dadf97",
+      id
+    );
+  };
+
+  const updateClient = async (id, progress) => {
+    console.log("id", id);
+    console.log("progress", progress);
+    return databases.updateDocument(
+      "65832e96a4e2a2f48a0a",
+      "65a9665c7ed715dadf97",
+      id,
+      {
+        progress: progress,
+      }
     );
   };
 
@@ -141,6 +186,10 @@ export const AuthProvider = ({ children }) => {
     taxRefundCreateId,
     taxRefundListId,
     taxRefundDeleteId,
+    createClient,
+    listClient,
+    deleteClient,
+    updateClient,
   };
 
   return (
