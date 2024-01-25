@@ -30,7 +30,7 @@ function Form() {
     try {
       console.log(data);
 
-      await axios.post(`http://localhost:3001/submit`, data, {
+      await axios.post(`https://nati-form-back.onrender.com/submit`, data, {
         headers: {
           "Content-Type": "application/json", // Change 'multipart/form-data' to 'application/json'
         },
