@@ -4,12 +4,12 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import IdentityCheck from "../../components/IdentityCheck";
-import Private from "../../components/Private";
+import IdentityCheck from "../../components/cpaForm/IdentityCheck";
+import Private from "../../components/cpaForm/Private";
 import InsuranceLogo from "../../insuranceLogo.jpg";
 import { useAuth } from "../../utils/AuthContext";
 import { FormProvider } from "react-hook-form";
-import Contact from "../../components/Contact";
+import Contact from "../../components/cpaForm/Contact";
 
 function Insurance() {
   const methods = useForm();

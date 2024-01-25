@@ -12,7 +12,7 @@ function Login() {
 
   useEffect(() => {
     if (user) {
-      navigate("/admin");
+      navigate("/manager");
     }
   }, [navigate, user]);
 
@@ -28,7 +28,11 @@ function Login() {
 
   return (
     <div className="login-container">
-      <form ref={loginForm} onSubmit={handleSubmit} className="login-form-container">
+      <form
+        ref={loginForm}
+        onSubmit={handleSubmit}
+        className="login-form-container"
+      >
         <Typography variant="h5" gutterBottom>
           התחברות
         </Typography>

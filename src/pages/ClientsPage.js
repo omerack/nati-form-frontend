@@ -1,44 +1,36 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button } from "@mui/material";
+import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "../utils/AuthContext";
-import AddClient from "../components/AddClient";
-import ClientInfo from "../components/ClientInfo";
+import AddClient from "../components/clientsTracker/AddClient";
 import "./ClientsPage.css";
-import ClientOptions from "../components/ClientOptions";
-import { useSelector } from "react-redux";
-import TableClients from "../components/TableClients";
+import TableClients from "../components/clientsTracker/TableClients";
 
 function ClientsPage() {
-  const Navigate = useNavigate();
-  const { listClient, createClient } = useAuth();
-
+  const { listClient, createClient, user } = useAuth();
   const [clients, setClients] = useState([]);
-  const clientStatusModalValue = useSelector(
-    (state) => state.modals.clientStatusModalValue
-  );
-  useEffect(() => {
-    const fetchData = async () => {
-      const listClientResponse = await listClient();
-      setClients(listClientResponse.documents);
-    };
-    fetchData().catch(console.error);
-  }, [listClient, setClients, createClient, clientStatusModalValue]);
 
-  const clientManagement = () => {
-    Navigate("/admin");
-  };
+  const fetchData = useCallback(
+    async () => {
+      try {
+        const listClientResponse = await listClient();
+        setClients(listClientResponse.documents);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [listClient]
+  );
+
+  useEffect(() => {
+    fetchData();
+  }, [listClient, createClient, fetchData]);
 
   return (
     <div className="clients-page-container">
       <h1>לקוחות</h1>
-      <AddClient clients={clients} setClients={setClients} />
-      <TableClients clients={clients} />
-      <ClientInfo />
-      <ClientOptions setClients={setClients} />
-      <Button onClick={clientManagement} variant="contained" color="primary">
-        ניהול
-      </Button>
+      {user.labels[0] === "admin" ? (
+        <AddClient clients={clients} fetchData={fetchData} />
+      ) : null}
+      <TableClients clients={clients} fetchData={fetchData} />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect } from "react";
-import { useAuth } from "../utils/AuthContext";
+import { useAuth } from "../../utils/AuthContext";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
@@ -55,7 +55,7 @@ function TableCpa({ cpaDocuments, setCpaDocuments }) {
         return (
           <Tooltip title="Delete">
             <IconButton onClick={() => deleteCpaRow(params.row.$id)}>
-              <DeleteIcon variant="contained" color="primary" size="small" />
+              <DeleteIcon variant="contained" size="small" />
             </IconButton>
           </Tooltip>
         );

@@ -3,7 +3,7 @@ import SignatureCanvas from "react-signature-canvas";
 import { useFormContext } from "react-hook-form";
 import { Button } from "@mui/material";
 import Alert from "@mui/material/Alert";
-import "../pages/Form.css";
+import "../../pages/Form.css";
 
 function Signature() {
   const signature = useRef();

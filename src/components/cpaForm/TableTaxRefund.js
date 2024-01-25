@@ -1,38 +1,39 @@
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect } from "react";
-import { useAuth } from "../utils/AuthContext";
+import { useAuth } from "../../utils/AuthContext";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 
-function TableInsurance({ insuranceDocuments, setInsuranceDocuments }) {
-  const { insuranceDeleteId, insuranceListId } = useAuth();
+function TableTaxRefund({ taxRefundDocuments, setTaxRefundDocuments }) {
+  const { taxRefundListId, taxRefundDeleteId } = useAuth();
+
   useEffect(() => {
     const fetchData = async (data) => {
-      const createIdResponse = await insuranceListId(data);
-      setInsuranceDocuments(createIdResponse.documents);
+      const createIdResponse = await taxRefundListId(data);
+      setTaxRefundDocuments(createIdResponse.documents);
     };
     fetchData().catch(console.error);
-  }, [insuranceListId, setInsuranceDocuments]);
+  }, [taxRefundListId, setTaxRefundDocuments]);
 
-  const deleteInsuranceRow = async (id) => {
+  const deleteTaxRefundRow = async (id) => {
     try {
-      await insuranceDeleteId(id);
-      const createIdResponse = await insuranceListId();
-      setInsuranceDocuments(createIdResponse.documents);
+      await taxRefundDeleteId(id);
+      const createIdResponse = await taxRefundListId();
+      setTaxRefundDocuments(createIdResponse.documents);
       console.log("Deleted");
     } catch (error) {
       console.error(error);
     }
   };
 
-  const insuranceColumns = [
+  const taxRefundColumns = [
     { field: "id", headerName: "תעודת זהות", width: 100 },
     {
-      field: "insuranceFee",
-      headerName: "הסכם שירותי ביטוח",
-      cellClassName: "insuranceFee",
+      field: "company",
+      headerName: "החברה",
+      cellClassName: "company",
       align: "center",
       headerAlign: "center",
       flex: 1,
@@ -45,8 +46,8 @@ function TableInsurance({ insuranceDocuments, setInsuranceDocuments }) {
       renderCell: (params) => {
         return (
           <Tooltip title="Delete">
-            <IconButton onClick={() => deleteInsuranceRow(params.row.$id)}>
-              <DeleteIcon variant="contained" color="primary" size="small" />
+            <IconButton onClick={() => deleteTaxRefundRow(params.row.$id)}>
+              <DeleteIcon variant="contained" size="small" />
             </IconButton>
           </Tooltip>
         );
@@ -57,8 +58,8 @@ function TableInsurance({ insuranceDocuments, setInsuranceDocuments }) {
   return (
     <Box sx={{ width: { sm: "100%", md: "50%" }, margin: "auto" }}>
       <DataGrid
-        rows={insuranceDocuments}
-        columns={insuranceColumns}
+        rows={taxRefundDocuments}
+        columns={taxRefundColumns}
         disableRowSelectionOnClick
         disablecolumSelectionOnClick
         disableColumnFilter
@@ -67,4 +68,4 @@ function TableInsurance({ insuranceDocuments, setInsuranceDocuments }) {
   );
 }
 
-export default TableInsurance;
+export default TableTaxRefund;

@@ -2,19 +2,18 @@ import { useAuth } from "../utils/AuthContext";
 import { Button } from "@mui/material";
 import { useFormContext } from "react-hook-form";
 import { useState } from "react";
-import PricingCpa from "../components/PricingCpa";
-import PricingInsurance from "../components/PricingInsurance";
-import PricingTaxRefund from "../components/PricingTaxRefund";
+import PricingCpa from "../components/cpaForm/PricingCpa";
+import PricingInsurance from "../components/cpaForm/PricingInsurance";
+import PricingTaxRefund from "../components/cpaForm/PricingTaxRefund";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
 import VolunteerActivismOutlinedIcon from "@mui/icons-material/VolunteerActivismOutlined";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
-import TableCpa from "../components/TableCpa";
-import TableInsurance from "../components/TableInsurance";
-import TableTaxRefund from "../components/TableTaxRefund";
+import TableCpa from "../components/cpaForm/TableCpa";
+import TableInsurance from "../components/cpaForm/TableInsurance";
+import TableTaxRefund from "../components/cpaForm/TableTaxRefund";
 import "./Admin.css";
-import { useNavigate } from "react-router-dom";
 
 function Admin() {
   const { logoutUser, cpaCreateId, insuranceCreateId, taxRefundCreateId } =
@@ -24,7 +23,6 @@ function Admin() {
   const [insuranceDocuments, setInsuranceDocuments] = useState([]);
   const [taxRefundDocuments, setTaxRefundDocuments] = useState([]);
   const [pricing, setPricing] = useState(0);
-  const Navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
@@ -54,18 +52,12 @@ function Admin() {
     }
   };
 
-  const clientManagement = () => {
-    Navigate("/clients");
-  };
 
   return (
     <div>
       <div className="logout-container">
         <Button onClick={logoutUser} variant="contained" color="primary">
           התנתק
-        </Button>
-        <Button onClick={clientManagement} variant="contained" color="primary">
-          לקוחות
         </Button>
       </div>
       <BottomNavigation

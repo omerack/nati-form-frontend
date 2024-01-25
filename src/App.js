@@ -2,7 +2,6 @@ import Form from "./pages/cpa/Form";
 import Review from "./pages/cpa/Review";
 import Submit from "./pages/cpa/Submit";
 import Login from "./pages/Login";
-import Admin from "./pages/Admin";
 import PrivateRoutes from "./utils/PrivateRoutes";
 import Insurance from "./pages/insurance/Insurance";
 import InsuranceReview from "./pages/insurance/InsuranceReview";
@@ -10,9 +9,9 @@ import InsuranceSubmit from "./pages/insurance/InsuranceSubmit";
 import TaxRefund from "./pages/taxRefund/TaxRefund";
 import TaxRefundReview from "./pages/taxRefund/TaxRefundReview";
 import TaxRefundSubmit from "./pages/taxRefund/TaxRefundSubmit";
-import ClientsPage from "./pages/ClientsPage";
 import { AuthProvider } from "./utils/AuthContext";
 import { useForm, FormProvider } from "react-hook-form";
+import Manager from "./pages/Manager";
 import {
   createBrowserRouter,
   Route,
@@ -37,8 +36,7 @@ function App() {
         <Route path="taxRefund/review" element={<TaxRefundReview />} />
         <Route path="taxRefund/submit" element={<TaxRefundSubmit />} />
         <Route element={<PrivateRoutes />}>
-          <Route path="admin" element={<Admin />} />
-          <Route path="clients" element={<ClientsPage />} />
+          <Route path="manager" element={<Manager />} />
         </Route>
       </Route>
     )

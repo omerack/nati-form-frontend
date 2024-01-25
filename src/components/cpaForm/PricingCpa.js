@@ -1,44 +1,35 @@
-import { Typography, Alert, Grid, Button, TextField } from "@mui/material";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
-import { useFormContext, Controller } from "react-hook-form";
+import { Button, TextField, Typography, Grid, Alert } from "@mui/material";
+import { useFormContext } from "react-hook-form";
 import CopyToClipboard from "react-copy-to-clipboard";
 
-function PricingTaxRefund({ taxRefundDocuments }) {
-  const { register, formState, control } = useFormContext();
+function PricingCpa({ cpaDocuments }) {
+  const { register, formState } = useFormContext();
   const { errors } = formState;
 
-  const taxRefundLink = "https://ackerman-cpa.onrender.com/taxRefund";
+  const cpaLink = "https://ackerman-cpa.onrender.com";
 
   return (
     <div>
-      <FormControl>
-        <FormLabel>טופס של מי?</FormLabel>
-        <Controller
-          name="company"
-          control={control}
-          defaultValue=""
-          rules={{ required: true }}
-          render={({ field }) => (
-            <RadioGroup {...field}>
-              <FormControlLabel
-                value="ackerman"
-                control={<Radio />}
-                label="ackerman"
-              />
-              <FormControlLabel
-                value="switch"
-                control={<Radio />}
-                label="switch"
-              />
-            </RadioGroup>
-          )}
+      <div className="input-container">
+        <Typography variant="h6">
+          הסכם התקשרות שירותי ביקורת דוחות כספיים
+        </Typography>
+        <TextField
+          sx={{ mb: "10px" }}
+          size="small"
+          label="הכנס סכום לשינוי"
+          {...register("financialReportFee")}
+        ></TextField>
+      </div>
+      <div className="input-container">
+        <Typography variant="h6">הסכם שירותי ניהול הנהלת חשבונות</Typography>
+        <TextField
+          sx={{ mb: "10px" }}
+          size="small"
+          label="הכנס סכום לשינוי"
+          {...register("BookKeepingFee")}
         />
-        <RadioGroup></RadioGroup>
-      </FormControl>
+      </div>
       <div className="input-container">
         <Typography variant="h6">תעודת זהות</Typography>
         <TextField
@@ -54,7 +45,7 @@ function PricingTaxRefund({ taxRefundDocuments }) {
                 );
               },
               isRegistered: (fieldValue) => {
-                const isRegistered = taxRefundDocuments.some((document) => {
+                const isRegistered = cpaDocuments.some((document) => {
                   if (document.id === fieldValue) {
                     return true;
                   }
@@ -72,8 +63,8 @@ function PricingTaxRefund({ taxRefundDocuments }) {
           צור הרשמה
         </Button>
       </Grid>
-      <div>
-        <CopyToClipboard text={taxRefundLink}>
+      <div className="clipboard">
+        <CopyToClipboard text={cpaLink}>
           <Button variant="contained" color="primary">
             העתק קישור
           </Button>
@@ -83,4 +74,4 @@ function PricingTaxRefund({ taxRefundDocuments }) {
   );
 }
 
-export default PricingTaxRefund;
+export default PricingCpa;

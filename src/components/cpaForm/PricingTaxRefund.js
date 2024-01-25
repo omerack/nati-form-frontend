@@ -1,24 +1,44 @@
-import { Button, TextField, Typography, Grid, Alert } from "@mui/material";
-import { useFormContext } from "react-hook-form";
+import { Typography, Alert, Grid, Button, TextField } from "@mui/material";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import { useFormContext, Controller } from "react-hook-form";
 import CopyToClipboard from "react-copy-to-clipboard";
 
-function PricingInsurance({ insuranceDocuments }) {
-  const { register, formState } = useFormContext();
+function PricingTaxRefund({ taxRefundDocuments }) {
+  const { register, formState, control } = useFormContext();
   const { errors } = formState;
 
-  const insuranceLink = "https://ackerman-cpa.onrender.com/insurance";
+  const taxRefundLink = "https://ackerman-cpa.onrender.com/taxRefund";
 
   return (
     <div>
-      <div className="input-container">
-        <Typography variant="h6">הסכם שירותי ביטוח</Typography>
-        <TextField
-          sx={{ mb: "10px" }}
-          size="small"
-          label="הכנס סכום לשינוי"
-          {...register("insuranceFee")}
-        ></TextField>
-      </div>
+      <FormControl>
+        <FormLabel>טופס של מי?</FormLabel>
+        <Controller
+          name="company"
+          control={control}
+          defaultValue=""
+          rules={{ required: true }}
+          render={({ field }) => (
+            <RadioGroup {...field}>
+              <FormControlLabel
+                value="ackerman"
+                control={<Radio />}
+                label="ackerman"
+              />
+              <FormControlLabel
+                value="switch"
+                control={<Radio />}
+                label="switch"
+              />
+            </RadioGroup>
+          )}
+        />
+        <RadioGroup></RadioGroup>
+      </FormControl>
       <div className="input-container">
         <Typography variant="h6">תעודת זהות</Typography>
         <TextField
@@ -34,7 +54,7 @@ function PricingInsurance({ insuranceDocuments }) {
                 );
               },
               isRegistered: (fieldValue) => {
-                const isRegistered = insuranceDocuments.some((document) => {
+                const isRegistered = taxRefundDocuments.some((document) => {
                   if (document.id === fieldValue) {
                     return true;
                   }
@@ -52,8 +72,8 @@ function PricingInsurance({ insuranceDocuments }) {
           צור הרשמה
         </Button>
       </Grid>
-      <div style={{ marginBottom: "20px" }}>
-        <CopyToClipboard text={insuranceLink}>
+      <div className="clipboard">
+        <CopyToClipboard text={taxRefundLink}>
           <Button variant="contained" color="primary">
             העתק קישור
           </Button>
@@ -63,4 +83,4 @@ function PricingInsurance({ insuranceDocuments }) {
   );
 }
 
-export default PricingInsurance;
+export default PricingTaxRefund;

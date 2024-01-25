@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from "react";
-import { account, databases } from "../appwriteConfig";
+import { account, databases } from "./appwriteConfig";
 import { ID } from "appwrite";
 
 const AuthContext = createContext();
@@ -11,19 +11,11 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     checkUserStatus();
   }, []);
-
   const loginUser = async (userInfo) => {
     setLoading(true);
-
-    console.log("userInfo", userInfo);
-
     try {
-      let response = await account.createEmailSession(
-        userInfo.email,
-        userInfo.password
-      );
+      await account.createEmailSession(userInfo.email, userInfo.password);
       let accountDetails = await account.get();
-      console.log(response);
       setUser(accountDetails);
     } catch (error) {
       console.error(error);
@@ -128,7 +120,7 @@ export const AuthProvider = ({ children }) => {
     );
   };
 
-  const createClient = async (name, phone, demandProducts, notesGilad) => {
+  const createClient = async (name, phone, demandProducts, notesGilad, id) => {
     return databases.createDocument(
       "65832e96a4e2a2f48a0a",
       "65a9665c7ed715dadf97",
@@ -139,11 +131,43 @@ export const AuthProvider = ({ children }) => {
         demandProducts: demandProducts,
         status: "בהמתנה",
         notesGilad: notesGilad,
+        id: id,
       }
     );
   };
-//   מעוניין שיתקשרו אליו בין השעות 14:00-15:30.
-// המלצתי לו להשקיע בקופת גמל להשקעה
+  const uploadClient = async (
+    name,
+    phone,
+    // demandProducts,
+    notesGilad,
+    status,
+    // boughtProducts,
+    notesGuy,
+    id
+  ) => {
+    // console.log(name);
+    // console.log(phone);
+    // console.log(demandProducts);
+    // console.log(notesGilad);
+    // console.log(boughtProducts);
+    // console.log(notesGuy);
+    // console.log(id);
+    return databases.createDocument(
+      "65832e96a4e2a2f48a0a",
+      "65a9665c7ed715dadf97",
+      ID.unique(),
+      {
+        name: name,
+        phone: phone,
+        // demandProducts: demandProducts,
+        notesGilad: notesGilad,
+        status: status,
+        // boughtProducts: boughtProducts,
+        notesGuy: notesGuy,
+        id: id,
+      }
+    );
+  };
 
   const listClient = async () => {
     return databases.listDocuments(
@@ -160,15 +184,55 @@ export const AuthProvider = ({ children }) => {
     );
   };
 
-  const updateClient = async (id, progress) => {
-    console.log("id", id);
-    console.log("progress", progress);
+  const updateGiladNotes = async (id, notesGilad) => {
     return databases.updateDocument(
       "65832e96a4e2a2f48a0a",
       "65a9665c7ed715dadf97",
       id,
       {
-        progress: progress,
+        notesGilad: notesGilad,
+      }
+    );
+  };
+
+  const updateGuyNotes = async (id, notesGuy) => {
+    return databases.updateDocument(
+      "65832e96a4e2a2f48a0a",
+      "65a9665c7ed715dadf97",
+      id,
+      {
+        notesGuy: notesGuy,
+      }
+    );
+  };
+
+  const updateStatus = async (id, status) => {
+    return databases.updateDocument(
+      "65832e96a4e2a2f48a0a",
+      "65a9665c7ed715dadf97",
+      id,
+      {
+        status: status,
+      }
+    );
+  };
+  const updateBoughtProducts = async (id, boughtProducts) => {
+    return databases.updateDocument(
+      "65832e96a4e2a2f48a0a",
+      "65a9665c7ed715dadf97",
+      id,
+      {
+        boughtProducts: boughtProducts,
+      }
+    );
+  };
+  const updateInfoIcon = async (id, date) => {
+    return databases.updateDocument(
+      "65832e96a4e2a2f48a0a",
+      "65a9665c7ed715dadf97",
+      id,
+      {
+        date: date,
       }
     );
   };
@@ -189,7 +253,12 @@ export const AuthProvider = ({ children }) => {
     createClient,
     listClient,
     deleteClient,
-    updateClient,
+    updateGiladNotes,
+    updateGuyNotes,
+    updateStatus,
+    uploadClient,
+    updateBoughtProducts,
+    updateInfoIcon,
   };
 
   return (

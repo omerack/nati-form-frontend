@@ -1,22 +1,43 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: {},
+  giladNotesValue: {},
+  guyNotesValue: {},
+  clientStatusValue: {},
 };
 
 const handleSelectedClient = createSlice({
   name: "selectedClient",
   initialState,
   reducers: {
-    clientDetails: (state, action) => {
+    giladNotes: (state, action) => {
       return {
         ...state,
-        value: action.payload,
+        giladNotesValue: action.payload,
+      };
+    },
+    guyNotes: (state, action) => {
+      return {
+        ...state,
+        guyNotesValue: action.payload,
+      };
+    },
+    clientStatus: (state, action) => {
+      return {
+        ...state,
+        clientStatusValue: action.payload,
+      };
+    },
+    deletedclient: (state, action) => {
+      return {
+        ...state,
+        clientStatusValue: action.payload,
       };
     },
   },
 });
 
-export const { clientDetails } = handleSelectedClient.actions;
+export const { guyNotes, giladNotes, clientStatus } =
+  handleSelectedClient.actions;
 
 export default handleSelectedClient.reducer;

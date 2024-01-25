@@ -39,21 +39,24 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultipleSelectChip() {
+export default function SelectProduct({
+  setSelectedProducts,
+}) {
   const theme = useTheme();
   const [personName, setPersonName] = useState([]);
   const { register } = useFormContext();
-
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
+    const updatedPersonName =
+      typeof value === "string" ? value.split(",") : value;
+    setPersonName(updatedPersonName);
 
+    if (setSelectedProducts) {
+      setSelectedProducts(updatedPersonName);
+    }
+  };
   return (
     <div>
       <FormControl sx={{ width: 250 }}>
@@ -65,7 +68,7 @@ export default function MultipleSelectChip() {
           input={
             <OutlinedInput
               label="Chip"
-              {...register("demandProducts", {
+              {...register(`demandProducts`, {
                 required: "נא להוסיף את המוצרים הרלוונטים",
               })}
             />

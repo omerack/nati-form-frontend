@@ -6,12 +6,11 @@ import {
   Modal,
   Alert,
 } from "@mui/material";
+import { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { useAuth } from "../utils/AuthContext";
-import { addClientModal } from "../state/modals/ModalSlice";
-import { useSelector, useDispatch } from "react-redux";
-import SelectProduct from "../components/SelectProduct";
-
+import { useAuth } from "../../utils/AuthContext";
+import SelectProduct from "./SelectProduct";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
 
 const style = {
   position: "absolute",
@@ -25,42 +24,43 @@ const style = {
   p: 4,
 };
 
-export default function AddClient({ clients, setClients }) {
-  const dispatch = useDispatch();
+export default function AddClient({ clients, fetchData }) {
   const { register, handleSubmit, reset, formState } = useFormContext();
   const { errors } = formState;
-  const { createClient, listClient } = useAuth();
-
-  const closeModal = () => dispatch(addClientModal());
-  const openModal = useSelector((state) => state.modals.addClientModalValue);
+  const { createClient } = useAuth();
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const onSubmit = (data) => {
-    console.log(data);
-    const fetchData = async () => {
+    const createData = async () => {
       await createClient(
         data.name,
         data.phone,
         data.demandProducts,
-        data.notesGilad
+        data.notesGilad,
+        data.id
       );
-      const updatedClientResponse = await listClient();
-      setClients(updatedClientResponse.documents);
+      fetchData();
       reset();
     };
-    fetchData().catch(console.error);
-    closeModal();
+    createData().catch(console.error);
+    handleClose();
   };
 
   return (
     <div>
-      <Button
-        onClick={() => dispatch(addClientModal())}
-        variant="contained"
-        color="primary"
-      >
-        הוסף לקוח
-      </Button>
-      <Modal open={openModal} onClose={closeModal}>
+      <div>
+        <Button
+          onClick={handleOpen}
+          variant="contained"
+          color="primary"
+          sx={{ borderRadius: 2 }}
+        >
+          <ControlPointIcon />
+        </Button>
+      </div>
+      <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Typography variant="h3" component="h2">
@@ -77,6 +77,27 @@ export default function AddClient({ clients, setClients }) {
               <Alert severity="error">{errors.name.message}</Alert>
             )}
             <Typography variant="h6" component="h2">
+              ת.ז
+            </Typography>
+            <TextField
+              size="small"
+              inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+              id="outlined-basic"
+              variant="outlined"
+              {...register("id", {
+                required: "נא למלא את תעודת הזהות",
+                validate: {
+                  length: (fieldValue) => {
+                    return (
+                      fieldValue.length === 9 ||
+                      "תעודת הזהות חייבת להיות 9 ספרות"
+                    );
+                  },
+                },
+              })}
+            />
+            {errors.id && <Alert severity="error">{errors.id.message}</Alert>}
+            <Typography variant="h6" component="h2">
               מספר טלפון
             </Typography>
             <TextField
@@ -87,7 +108,7 @@ export default function AddClient({ clients, setClients }) {
                   length: (fieldValue) => {
                     return (
                       fieldValue.length === 10 ||
-                      "תעודת הזהות חייבת להיות 10 ספרות"
+                      "מספר הטלפון חייב להיות 10 ספרות"
                     );
                   },
                   isRegistered: (fieldValue) => {
