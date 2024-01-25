@@ -1,6 +1,6 @@
 import PersonalInfo from "./components/PersonalInfo";
 import Signature from "./components/Signature";
-import { useForm, FormProvider } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import { useState } from "react";
@@ -8,10 +8,9 @@ import ClipLoader from "react-spinners/ClipLoader";
 import axios from "axios";
 // import logo from "./logo.png";
 import "./Form.css";
+// import { DevTool } from "@hookform/devtools";
 
 function Form() {
-  const methods = useForm();
-
   // {
   //   defaultValues: {
   //     name: "עומר אקרמן",
@@ -27,14 +26,14 @@ function Form() {
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { handleSubmit } = methods;
+  const { handleSubmit } = useFormContext();
 
   const onSubmit = async (data) => {
     setLoading(true);
     try {
       // console.log(data);
 
-      const res = await axios.post(`https://nati-form-back.onrender.com/submit`, data, {
+      const res = await axios.post(`http://localhost:3001/submit`, data, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -55,18 +54,17 @@ function Form() {
       {/* <div className="div-img">
         <img src={logo} alt="form" className="img" />
       </div> */}
-      <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="section">
-            <PersonalInfo />
-            <Signature />
-          </div>
-          <Button type="submit" variant="contained" color="primary">
-            הבא
-          </Button>
-          {loading && <ClipLoader color="#1976d2" />}
-        </form>
-      </FormProvider>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="section">
+          <PersonalInfo />
+          <Signature />
+        </div>
+        <Button type="submit" variant="contained" color="primary">
+          הבא
+        </Button>
+        {loading && <ClipLoader color="#1976d2" />}
+      </form>
+      {/* <DevTool control={control} /> */}
     </div>
   );
 }

@@ -6,8 +6,11 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
+import { useForm, FormProvider } from "react-hook-form";
 
 function App() {
+  const methods = useForm();
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/">
@@ -17,9 +20,9 @@ function App() {
     )
   );
   return (
-    <div className="App">
+    <FormProvider {...methods}>
       <RouterProvider router={router} />
-    </div>
+    </FormProvider>
   );
 }
 
