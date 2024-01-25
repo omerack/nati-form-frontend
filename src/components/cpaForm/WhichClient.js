@@ -4,7 +4,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Private from "./Private";
-import Association from "./Association";
 import FamilyState from "./FamilyState";
 
 function PersonalInfo({ client, setClient }) {
@@ -39,9 +38,7 @@ function PersonalInfo({ client, setClient }) {
           <Private />
           <FamilyState />
         </div>
-      ) : (
-        <Association />
-      )}
+      ) : null}
     </div>
   );
 }

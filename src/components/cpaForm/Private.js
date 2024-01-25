@@ -14,24 +14,12 @@ function Private({ client }) {
           margin="normal"
           style={{ marginLeft: "10px", width: "350px" }}
           id="outlined-basic"
-          label="שם פרטי"
+          label="שם מלא"
           variant="outlined"
           {...register("name", { required: "נא למלא את השם הפרטי" })}
         />
-        <TextField
-          margin="normal"
-          style={{ width: "350px" }}
-          id="outlined-basic"
-          label="שם משפחה"
-          variant="outlined"
-          {...register("lastName", {
-            required: "נא למלא את שם המשפחה",
-          })}
-        />
+
         {errors.name && <Alert severity="error">{errors.name.message}</Alert>}
-        {errors.lastName && (
-          <Alert severity="error">{errors.lastName.message}</Alert>
-        )}
       </div>
       <div className="input-group">
         <label>תעודת זהות</label>

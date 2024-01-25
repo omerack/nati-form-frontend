@@ -1,18 +1,15 @@
 import "../Form.css";
-import cpaLogo from "../../cpaLogo.jpg";
 import { useState } from "react";
 import Typography from "@mui/material/Typography";
-import IdentityCheck from "../../components/cpaForm/IdentityCheck";
-import WhichClient from "../../components/cpaForm/WhichClient";
-import Contact from "../../components/cpaForm/Contact";
-import Adress from "../../components/cpaForm/Adress";
+import Private from "../../components/cpaForm/Private";
+import FamilyState from "../../components/cpaForm/FamilyState";
 // import { DevTool } from "@hookform/devtools";
 import axios from "axios";
 import { Button, Alert } from "@mui/material";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
-import { useAuth } from "../../utils/AuthContext";
+import Signature from "../../components/cpaForm/Signature";
 
 function Form() {
   const methods = useForm();
@@ -21,7 +18,6 @@ function Form() {
   const { errors } = formState;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const { cpaListId } = useAuth();
   const [isconfirmed, setIsConfirmed] = useState(false);
   const [client, setClient] = useState("private");
 
@@ -30,43 +26,16 @@ function Form() {
   };
 
   const onSubmit = async (data) => {
-    const { id, name, lastName, associationName } = data;
     setLoading(true);
     try {
-      let BookKeepingFee = null;
-      let financialReportFee = null;
-
-      const listIdResponse = await cpaListId(data);
-      const found = listIdResponse.documents.some((document) => {
-        if (document.id === data.id) {
-          BookKeepingFee = document.BookKeepingFee;
-          financialReportFee = document.financialReportFee;
-          return true;
-        }
-        return false;
-      });
-
-      if (!found) {
-        setIsConfirmed(true);
-        return;
-      } else {
-        data.BookKeepingFee = BookKeepingFee;
-        data.financialReportFee = financialReportFee;
-      }
       console.log(data);
 
-      await axios.post(`https://gilad-form-backend.onrender.com/view`, data, {
+      await axios.post(`http://localhost:3001/submit`, data, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json", // Change 'multipart/form-data' to 'application/json'
         },
       });
-      navigate(
-        `/review/?id=${id}&name=${encodeURIComponent(
-          name
-        )}&lastName=${encodeURIComponent(
-          lastName
-        )}&associationName=${encodeURIComponent(associationName)}`
-      );
+      navigate("submit");
       console.log("success");
     } catch (error) {
       console.error(error);
@@ -77,9 +46,6 @@ function Form() {
 
   return (
     <>
-      <div className="div-img">
-        <img src={cpaLogo} alt="form" className="img" />
-      </div>
       <FormProvider {...methods}>
         <form
           className="form-container"
@@ -91,20 +57,15 @@ function Form() {
             פרטי לקוח חדש
           </Typography>
           <div className="section">
-            <WhichClient
+            <Private
               register={register}
               errors={errors}
               client={client}
               setClient={setClient}
             />
           </div>
-          <div className="section">
-            <Contact />
-            <Adress />
-          </div>
-          <div className="input-group">
-            <IdentityCheck client={client} />
-          </div>
+          <FamilyState />
+          <Signature />
           <Button
             type="submit"
             variant="contained"
