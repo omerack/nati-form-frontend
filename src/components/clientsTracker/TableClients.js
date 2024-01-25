@@ -167,7 +167,10 @@ export default function TableClients({ clients, fetchData }) {
                         style={{ cursor: "pointer" }}
                       />
                     ) : null}
-                    <Tooltip title={getTitle(client.date)}>
+                    <Tooltip
+                      enterTouchDelay={10}
+                      title={getTitle(client.date)}
+                    >
                       <InfoIcon />
                     </Tooltip>
                   </TableCell>
